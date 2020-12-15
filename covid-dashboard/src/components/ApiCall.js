@@ -1,26 +1,63 @@
-// const axios = require('axios').default;
-
 class ApiCall {
     constructor() {
         this.countriesData = [];
         this.summaryData = {};
     }
 
-    async requestData(url, retryCount) {
-        await fetch(`https://api.covid19api.com/${url}`)
-        // await axios.get(`https://api.covid19api.com/${url}`)
-        .then(this.checkStatus)
-        .then(this.toJson)
-        .then(data => this.sortByDescend(data, url))
-        .catch(error => retryCount < 20 ? this.requestData(url, retryCount + 1) : this.displayError(error));
+    timeout() {
+        return new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    async requestCountry(url, retryCount) {
+    async requestSummary(retryCount = 0) {
+        await fetch(`https://api.covid19api.com/summary`)
+        .then(this.checkStatus)
+        .then(this.toJson)
+        .then(data => this.sortData(data))
+        .catch(async (error) => {
+            await this.timeout();
+            retryCount < 5 
+                ? await this.requestSummary(retryCount + 1) 
+                : this.displayError(error);
+        });
+    }
+
+    async requestCountry(url, retryCount = 0) {
         await fetch(`https://api.covid19api.com/total/country/${url}`)
         .then(this.checkStatus)
         .then(this.toJson)
-        .then(data => this[url] = data)
-        .catch(error => retryCount < 20 ? this.requestCountry(url, retryCount + 1) : this.displayError(error));
+        .then(data => this[`${url}`.table] = data)
+        .catch(async (error) => {
+            await this.timeout();
+            retryCount < 5 
+                ? await this.requestCountry(url, retryCount + 1) 
+                : this.displayError(error);
+        });
+    }
+
+    async requestWorldData(retryCount = 0) {
+        await fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=300`)
+        .then(this.checkStatus)
+        .then(this.toJson)
+        .then(data => this.worldData = data)
+        .catch(async (error) => {
+            await this.timeout();
+            retryCount < 5 
+                ? await this.requestWorldData(retryCount + 1) 
+                : this.displayError(error);
+        });
+    }
+
+    async requestCountryTimeline(url, retryCount = 0) {
+        await fetch(`https://disease.sh/v3/covid-19/historical/${url}?lastdays=300`)
+        .then(this.checkStatus)
+        .then(this.toJson)
+        .then(data => this[`${url}`.chart] = data)
+        .catch(async (error) => {
+            await this.timeout();
+            retryCount < 5 
+                ? await this.requestCountryTimeline(url, retryCount + 1)
+                : this.displayError(error);
+        });
     }
 
     checkStatus(response) {
@@ -35,18 +72,11 @@ class ApiCall {
         return response.json();
     }
 
-    sortByDescend(data, url) {
-        if (url === 'summary') {
-            data.Countries.sort((a, b) => {
-                return b.TotalConfirmed - a.TotalConfirmed;
-            });
-            this.summaryData = data;
-        } else {
-            data.sort((a, b) => {
-                return b.TotalConfirmed - a.TotalConfirmed;
-            });
-            this.worldData = data;
-        }
+    sortData(data) {
+        data.Countries.sort((a, b) => {
+            return b.TotalConfirmed - a.TotalConfirmed;
+        });
+        this.summaryData = data;
         console.log(data)
     }
 

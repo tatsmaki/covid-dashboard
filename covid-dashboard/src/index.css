@@ -1,47 +1,79 @@
 body {
-   display: flex;
-   width: 100vw;
-   height: 100vh;
-   box-sizing: border-box;
-   margin: 0;
-   padding: 0;
-   justify-content: space-evenly;
-   align-items: center;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .list-component {
-   height: 98vh;
-   width: 25vw;
-   border: 1px black solid;
+    display: flex;
+    height: 98vh;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px black solid;
 }
+
+.search {
+    height: 5%;
+}
+
 .list {
-   height: 100%;
-   width: 100%;
-   box-sizing: border-box;
-   padding: 0;
-   margin: 0;
-   overflow-y: scroll;
+    height: 90%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
 }
 .list > li {
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .list > li::marker {
-   content: "";
+    content: "";
+}
+
+.main {
+    display: flex;
+    height: 98vh;
+    width: 73vw;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.map-component {
+    height: 56vh;
+    border: 1px black solid;
+}
+
+.table-and-chart {
+    display: flex;
+    justify-content: space-between;
 }
 
 .table-component {
-   height: 40vh;
-   width: 30vw;
-   border: 1px black solid;
+    height: 40vh;
+    width: 49%;
+    border: 1px black solid;
 }
 .table {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
-.graph-component {
-   height: 40vh;
-   width: 30vw;
-   border: 1px black solid;
+.chart-component {
+    height: 40vh;
+    width: 49%;
+    border: 1px black solid;
+    /* overflow-x: scroll; */
 }
+
+/* .canvas {
+    width: 150% !important;
+    height: 100% !important;
+} */
