@@ -21,7 +21,6 @@ const chartConfig = {
 class Graph {
   constructor(world) {
     this.world = world;
-    console.log('create chart');
   }
 
   displayChart() {
@@ -35,10 +34,7 @@ class Graph {
   }
 
   initChart() {
-    const timestamps = [];
-    for (const time in this.world.cases) {
-      timestamps.push(time);
-    }
+    const timestamps = Object.keys(this.world.cases);
     this.days = Object.values(this.world.cases);
 
     const time = [];
@@ -68,10 +64,7 @@ class Graph {
   renderChart(countryData, status) {
     chartConfig.data.datasets.pop();
 
-    const timestamps = [];
-    for (const time in countryData.timeline[status]) {
-      timestamps.push(time);
-    }
+    const timestamps = Object.keys(countryData.timeline[status]);
     this.days = Object.values(countryData.timeline[status]);
 
     const time = [];

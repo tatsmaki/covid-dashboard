@@ -1,7 +1,6 @@
 class List {
   constructor(countries) {
     this.countries = countries;
-    console.log('create list');
   }
 
   displayList() {

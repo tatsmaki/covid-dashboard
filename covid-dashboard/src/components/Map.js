@@ -1,6 +1,7 @@
 class Map {
   constructor() {
-    console.log('create map');
+    this.map = null;
+    // hehe
   }
 }
 

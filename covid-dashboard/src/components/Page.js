@@ -8,7 +8,6 @@ class Page {
   constructor() {
     this.displayPage();
     this.apiData = new ApiCall();
-    this.waitForApi();
   }
 
   displayPage() {
@@ -63,7 +62,6 @@ class Page {
   async clickHandler(event) {
     if (event.target !== event.currentTarget) {
       const countryCode = event.target.closest('li').getAttribute('data-country');
-      console.log(countryCode);
       await this.apiData.requestCountry(countryCode);
       this.tableData.renderTable(this.apiData[`${countryCode}`.table]);
       await this.apiData.requestCountryTimeline(countryCode);
