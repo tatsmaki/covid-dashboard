@@ -1,7 +1,8 @@
 class Map {
-    constructor() {
-        console.log('create map')
-    }
+  constructor() {
+    this.map = null;
+    // hehe
+  }
 }
 
 export default Map;
