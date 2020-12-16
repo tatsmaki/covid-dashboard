@@ -41,9 +41,10 @@ class Page {
   }
 
   async waitForApi() {
+    await this.apiData.getPopulation();
     await this.apiData.requestSummary();
 
-    this.countriesList = new List(this.apiData.summaryData.Countries);
+    this.countriesList = new List(this.apiData.map);
     const list = this.countriesList.displayList();
     list.addEventListener('click', this.clickHandler.bind(this));
     this.listComponent.appendChild(list);
@@ -62,12 +63,12 @@ class Page {
   async clickHandler(event) {
     if (event.target !== event.currentTarget) {
       const countryCode = event.target.closest('li').getAttribute('data-country');
-      await this.apiData.requestCountry(countryCode);
-      this.tableData.renderTable(this.apiData[`${countryCode}`.table]);
-      await this.apiData.requestCountryTimeline(countryCode);
-
+      this.tableData.renderTable(this.apiData.map.get(countryCode));
+      if (!this.apiData[`${countryCode}chart`]) {
+        await this.apiData.requestCountryTimeline(countryCode);
+      }
       const status = 'cases';
-      this.chartData.renderChart(this.apiData[`${countryCode}`.chart], status);
+      this.chartData.renderChart(this.apiData[`${countryCode}chart`], status);
     }
   }
 }

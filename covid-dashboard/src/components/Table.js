@@ -14,11 +14,10 @@ class Table {
   }
 
   renderTable(countryData) {
-    const lastDay = countryData.pop();
-    this.table.innerHTML = `<span>${lastDay.Country}</span>
-      <span>Confirmed: ${lastDay.Confirmed}</span>
-      <span>Deaths: ${lastDay.Deaths}</span>
-      <span>Recovered: ${lastDay.Recovered}</span>`;
+    this.table.innerHTML = `<span>${countryData.Country}</span>
+      <span>Confirmed: ${countryData.TotalConfirmed}</span>
+      <span>Deaths: ${countryData.TotalDeaths}</span>
+      <span>Recovered: ${countryData.TotalRecovered}</span>`;
   }
 }
 
