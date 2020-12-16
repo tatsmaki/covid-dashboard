@@ -7,7 +7,7 @@ class ApiCall {
   }
 
   async getPopulation(retryCount = 0) {
-    await fetch(`https://restcountries.eu/rest/v2/all?fields=population;flag;alpha2Code`)
+    await fetch('https://restcountries.eu/rest/v2/all?fields=population;flag;alpha2Code')
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {
@@ -22,13 +22,13 @@ class ApiCall {
         }
       });
   }
-  
+
   async requestSummary(retryCount = 0) {
     await fetch('https://api.covid19api.com/summary')
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {
-        this.sortData(data)
+        this.sortData(data);
       })
       .catch(async (error) => {
         await apiHelp.timeout();
@@ -78,20 +78,20 @@ class ApiCall {
     data.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
     this.summaryData = data;
 
-    const countriesData = data.Countries.filter(cases => cases.TotalConfirmed > 27);
+    const countriesData = data.Countries.filter((cases) => cases.TotalConfirmed > 27);
 
     const population = this.population.reduce((acc, cur) => {
       acc[cur.alpha2Code] = {
         code: cur.alpha2Code,
         flag: cur.flag,
-        pop: cur.population
-      }
+        pop: cur.population,
+      };
       return acc;
     }, {});
-    
+
     this.map = countriesData.reduce((acc, cur) => {
-      const pop = population[cur.CountryCode].pop;
-      const flag = population[cur.CountryCode].flag;
+      const { pop } = population[cur.CountryCode];
+      const { flag } = population[cur.CountryCode];
       acc.set(cur.CountryCode, {
         Country: cur.Country,
         CountryCode: cur.CountryCode,
@@ -102,7 +102,7 @@ class ApiCall {
         NewDeaths: cur.NewDeaths,
         NewRecovered: cur.NewRecovered,
         population: pop,
-        flag: flag
+        svg: flag,
       });
       return acc;
     }, new Map());
