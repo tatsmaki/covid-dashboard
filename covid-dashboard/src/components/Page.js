@@ -47,6 +47,7 @@ class Page {
     this.countriesList = new List(this.apiData.map);
     const list = this.countriesList.displayList();
     list.addEventListener('click', this.clickHandler.bind(this));
+    this.search.addEventListener('input', this.inputHandler.bind(this));
     this.listComponent.appendChild(list);
 
     this.tableData = new Table(this.apiData.summaryData.Global);
@@ -70,6 +71,17 @@ class Page {
       const status = 'cases';
       this.chartData.renderChart(this.apiData[`${countryCode}chart`], status);
     }
+  }
+
+  inputHandler() {
+    const look = this.search.value.toLowerCase();
+    [...this.countriesList.list.children].forEach((item) => {
+      if (!item.getAttribute('data-search').includes(look)) {
+        item.classList.add('hide');
+      } else {
+        item.classList.remove('hide');
+      }
+    });
   }
 }
 

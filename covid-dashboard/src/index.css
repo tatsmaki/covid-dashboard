@@ -33,9 +33,20 @@ body {
 .list > li {
   display: flex;
   justify-content: space-between;
+  height: 4vh;
 }
 .list > li::marker {
   content: "";
+}
+.list > li:hover {
+  cursor: default;
+}
+.list > li > span > img {
+  height: 2vh;
+  width: 2vw;
+}
+.list > li.hide {
+  display: none;
 }
 
 .main {
@@ -70,10 +81,4 @@ body {
   height: 40vh;
   width: 49%;
   border: 1px black solid;
-  /* overflow-x: scroll; */
 }
-
-/* .canvas {
-    width: 150% !important;
-    height: 100% !important;
-} */
