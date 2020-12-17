@@ -79,7 +79,6 @@ class ApiCall {
     this.summaryData = data;
 
     const countriesData = data.Countries.filter((cases) => cases.TotalConfirmed > 27);
-
     const population = this.population.reduce((acc, cur) => {
       acc[cur.alpha2Code] = {
         code: cur.alpha2Code,
