@@ -72,24 +72,28 @@ class Page {
 
   async clickHandler(event) {
     if (event.target !== event.currentTarget) {
-      const countryCode = event.target.closest('li').getAttribute('data-country');
-      this.tableData.renderTable(this.apiData.map.get(countryCode));
-      if (!this.apiData[`${countryCode}chart`]) {
-        await this.apiData.requestCountryTimeline(countryCode);
+      this.countryCode = event.target.closest('li').getAttribute('data-country');
+      console.log('11111', this.apiData.map);
+      this.tableData.renderTable(this.apiData.map.get(this.countryCode));
+      if (!this.apiData[`${this.countryCode}chart`]) {
+        await this.apiData.requestCountryTimeline(this.countryCode);
       }
       const status = 'cases';
-      this.chartData.renderChart(this.apiData[`${countryCode}chart`], status);
+      this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], status);
     }
   }
 
   clickPeriodBtn() {
     this.tableData.setAnotherPeriod();
     this.periodButton.textContent = this.tableData.getAnotherPeriod();
+    this.tableData.renderTable(this.apiData.map.get(this.countryCode));
+    console.log('!!!!')
   }
 
   clickRelativeAbsoluteBtn() {
     this.tableData.setAnotherRelativeAbsoluteValue();
     this.relativeAbsoluteButton.textContent = this.tableData.getAnotherRelativeAbsoluteValue();
+    this.tableData.renderTable(this.apiData.map.get(this.countryCode));
   }
 }
 
