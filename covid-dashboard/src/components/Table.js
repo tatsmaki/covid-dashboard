@@ -41,15 +41,12 @@ class Table {
         return this.table;
     }
 
-    renderTable(countryData) {
-        const lastDay = countryData.pop();
-        console.log(lastDay)
-        this.table.innerHTML =
-            `<span>${lastDay.Country} for ${this.period} and with ${this.relativeAbsoluteValue}</span>
-        <span>Confirmed: ${lastDay.Confirmed}</span>
-        <span>Deaths: ${lastDay.Deaths}</span>
-        <span>Recovered: ${lastDay.Recovered}</span>`
-    }
+  renderTable(countryData) {
+    this.table.innerHTML = `<span>${countryData.Country}</span>
+      <span>Confirmed: ${countryData.TotalConfirmed}</span>
+      <span>Deaths: ${countryData.TotalDeaths}</span>
+      <span>Recovered: ${countryData.TotalRecovered}</span>`;
+  }
 }
 
 export default Table;
