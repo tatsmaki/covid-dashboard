@@ -3,7 +3,6 @@ class Table {
     this.summary = summary;
     this.period = 'Total';
     this.relativeAbsoluteValue = 'absolute value';
-    console.log('create table')
   }
 
   getAnotherRelativeAbsoluteValue() {
@@ -35,39 +34,32 @@ class Table {
   }
 
   setTableData() {
-    this.table.innerHTML =
-      `<span>World for ${this.period} and with ${this.relativeAbsoluteValue}</span>
+    this.table.innerHTML = `<span>World for ${this.period} and with ${this.relativeAbsoluteValue}</span>
         <span>Confirmed: ${this.summary.TotalConfirmed}</span>
         <span>Deaths: ${this.summary.TotalDeaths}</span>
-        <span>Recovered: ${this.summary.TotalRecovered}</span>`
+        <span>Recovered: ${this.summary.TotalRecovered}</span>`;
     return this.table;
   }
 
-  renderTable(countryData) {
-    // const prefix = this.getPrefix();
-    // console.log(prefix);
-    console.log(countryData);
-    if(this.relativeAbsoluteValue.includes('relative')){
-      const relativeConfirmed = (countryData[`${this.period}Confirmed`] * 100000) / countryData.population;
-      const relativeDeaths = (countryData[`${this.period}Deaths`] * 100000) / countryData.population;
-      const relativeRecovered = (countryData[`${this.period}Recovered`] * 100000) / countryData.population;
-      this.table.innerHTML = `<span>${countryData.Country} for ${this.period.toLowerCase()} and with ${this.relativeAbsoluteValue}</span>
+  renderTable(countryData = this.summary) {
+    const worldPopulation = 7827000000;
+    const countryName = countryData.Country ? countryData.Country : 'World';
+    const population = countryData.population ? countryData.population : worldPopulation;
+    if (this.relativeAbsoluteValue.includes('relative')) {
+      const relativeConfirmed = Math.round((countryData[`${this.period}Confirmed`] * 100000) / population);
+      const relativeDeaths = Math.round((countryData[`${this.period}Deaths`] * 100000) / population);
+      const relativeRecovered = Math.round((countryData[`${this.period}Recovered`] * 100000) / population);
+      this.table.innerHTML = `<span>${countryName} for ${this.period.toLowerCase()} and with ${this.relativeAbsoluteValue}</span>
       <span>Confirmed: ${relativeConfirmed}</span>
       <span>Deaths: ${relativeDeaths}</span>
       <span>Recovered: ${relativeRecovered}</span>`;
     } else {
-      this.table.innerHTML = `<span>${countryData.Country} for ${this.period.toLowerCase()} and with ${this.relativeAbsoluteValue}</span>
+      this.table.innerHTML = `<span>${countryName} for ${this.period.toLowerCase()} and with ${this.relativeAbsoluteValue}</span>
       <span>Confirmed: ${countryData[`${this.period}Confirmed`]}</span>
       <span>Deaths: ${countryData[`${this.period}Deaths`]}</span>
       <span>Recovered: ${countryData[`${this.period}Recovered`]}</span>`;
     }
   }
-  // getPrefix(){
-  //   if(this.period === 'Total'){
-  //     return 'Total';
-  //   }
-  //   return 'New';
-  // }
 }
 
 export default Table;

@@ -73,7 +73,6 @@ class Page {
   async clickHandler(event) {
     if (event.target !== event.currentTarget) {
       this.countryCode = event.target.closest('li').getAttribute('data-country');
-      console.log('11111', this.apiData.map);
       this.tableData.renderTable(this.apiData.map.get(this.countryCode));
       if (!this.apiData[`${this.countryCode}chart`]) {
         await this.apiData.requestCountryTimeline(this.countryCode);
@@ -87,7 +86,6 @@ class Page {
     this.tableData.setAnotherPeriod();
     this.periodButton.textContent = this.tableData.getAnotherPeriod();
     this.tableData.renderTable(this.apiData.map.get(this.countryCode));
-    console.log('!!!!')
   }
 
   clickRelativeAbsoluteBtn() {
