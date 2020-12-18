@@ -12,8 +12,21 @@ class List {
 
   createListItem(country) {
     const listItem = document.createElement('li');
+    const wrap = document.createElement('span');
+    const flag = document.createElement('img');
+    const name = document.createElement('span');
+    const cases = document.createElement('span');
+
     listItem.setAttribute('data-country', country.CountryCode);
-    listItem.innerHTML = `<span>${country.Country}</span><span>${country.TotalConfirmed}</span>`;
+    listItem.setAttribute('data-search', country.Country.toLowerCase());
+    flag.src = country.svg;
+    name.textContent = country.Country;
+    cases.textContent = country.TotalConfirmed;
+    
+    listItem.appendChild(wrap);
+    wrap.appendChild(flag);
+    wrap.appendChild(name);
+    listItem.appendChild(cases);
     this.list.appendChild(listItem);
   }
 }
