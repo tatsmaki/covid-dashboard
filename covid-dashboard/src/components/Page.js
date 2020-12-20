@@ -69,6 +69,8 @@ class Page {
     this.chartComponent.appendChild(this.chartData.displayChart());
 
     this.awesomeMap = new Map();
+    this.mapComponent.appendChild(this.awesomeMap.mapContainer);
+    this.awesomeMap.displayMap();
   }
 
   async clickHandler(event) {
