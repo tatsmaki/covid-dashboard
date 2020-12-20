@@ -20,7 +20,7 @@ class Page {
     const tableAndChart = document.createElement('div');
     this.tableComponent = document.createElement('div');
     this.periodButton = document.createElement('button');
-    this.relativeAbsoluteButton = document.createElement('button');
+    this.valueTypeElement = document.createElement('select');
     this.chartComponent = document.createElement('div');
 
     this.listComponent.classList.add('list-component');
@@ -31,7 +31,7 @@ class Page {
     tableAndChart.classList.add('table-and-chart');
     this.tableComponent.classList.add('table-component');
     this.periodButton.classList.add('period-button');
-    this.relativeAbsoluteButton.classList.add('relative-absolute-button');
+    this.valueTypeElement.classList.add('value-type');
     this.chartComponent.classList.add('chart-component');
 
     fragment.appendChild(this.listComponent);
@@ -40,7 +40,7 @@ class Page {
     main.appendChild(this.mapComponent);
     main.appendChild(tableAndChart);
     this.tableComponent.append(this.periodButton);
-    this.tableComponent.append(this.relativeAbsoluteButton);
+    this.tableComponent.append(this.valueTypeElement);
     tableAndChart.appendChild(this.tableComponent);
     tableAndChart.appendChild(this.chartComponent);
     document.body.appendChild(fragment);
@@ -59,8 +59,17 @@ class Page {
     this.tableData = new Table(this.apiData.summaryData.Global);
     this.periodButton.textContent = this.tableData.getAnotherPeriod();
     this.periodButton.addEventListener('click', this.clickPeriodBtn.bind(this));
-    this.relativeAbsoluteButton.textContent = this.tableData.getAnotherRelativeAbsoluteValue();
-    this.relativeAbsoluteButton.addEventListener('click', this.clickRelativeAbsoluteBtn.bind(this));
+    const valueArray = ['absolute values', 'relative values, per 100000', 'percentage values, %'];
+    valueArray.forEach((item) => {
+      const el = document.createElement('option');
+      el.value = item;
+      el.textContent = item;
+      if (item.includes('absolute')) {
+        el.selected = true;
+      }
+      this.valueTypeElement.append(el);
+    });
+    this.valueTypeElement.addEventListener('click', this.clickTypeValueOption.bind(this));
     this.tableComponent.appendChild(this.tableData.displayTable());
 
     await this.apiData.requestWorldData();
@@ -100,10 +109,11 @@ class Page {
     this.tableData.renderTable(this.apiData.map.get(this.countryCode));
   }
 
-  clickRelativeAbsoluteBtn() {
-    this.tableData.setAnotherRelativeAbsoluteValue();
-    this.relativeAbsoluteButton.textContent = this.tableData.getAnotherRelativeAbsoluteValue();
-    this.tableData.renderTable(this.apiData.map.get(this.countryCode));
+  clickTypeValueOption(e) {
+    if (e.target.value !== this.tableData.valueType) {
+      this.tableData.setValueType(e.target.value);
+      this.tableData.renderTable(this.apiData.map.get(this.countryCode));
+    }
   }
 }
 
