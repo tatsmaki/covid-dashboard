@@ -36,9 +36,9 @@ class Table {
     let deaths;
     let recovered;
     if (this.valueType.includes('relative')) {
-      confirmed = Math.round((countryData[`${this.period}Confirmed`] * 100000) / population);
-      deaths = Math.round((countryData[`${this.period}Deaths`] * 100000) / population);
-      recovered = Math.round((countryData[`${this.period}Recovered`] * 100000) / population);
+      confirmed = this.calculateRelativeData(countryData, population, 'Confirmed');
+      deaths = this.calculateRelativeData(countryData, population, 'Deaths');
+      recovered = this.calculateRelativeData(countryData, population, 'Recovered');
     }
     if (this.valueType.includes('absolute')) {
       confirmed = countryData[`${this.period}Confirmed`];
@@ -46,14 +46,22 @@ class Table {
       recovered = countryData[`${this.period}Recovered`];
     }
     if (this.valueType.includes('percentage')) {
-      confirmed = ((countryData[`${this.period}Confirmed`] * 100) / population).toFixed(2);
-      deaths = ((countryData[`${this.period}Deaths`] * 100) / population).toFixed(2);
-      recovered = ((countryData[`${this.period}Recovered`] * 100) / population).toFixed(2);
+      confirmed = this.calculatePercentageData(countryData, population, 'Confirmed');
+      deaths = this.calculatePercentageData(countryData, population, 'Deaths');
+      recovered = this.calculatePercentageData(countryData, population, 'Recovered');
     }
     this.table.innerHTML = `<span>${countryName} statistic for ${currentPeriod} with ${this.valueType}</span>
       <span>Confirmed: ${confirmed}</span>
       <span>Deaths: ${deaths}</span>
       <span>Recovered: ${recovered}</span>`;
+  }
+
+  calculateRelativeData(countryData, population, status) {
+    return Math.round((countryData[`${this.period}${status}`] * 100000) / population);
+  }
+
+  calculatePercentageData(countryData, population, status) {
+    return ((countryData[`${this.period}${status}`] * 100) / population).toFixed(2);
   }
 }
 
