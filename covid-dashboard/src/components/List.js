@@ -31,7 +31,8 @@ class List {
     prev.textContent = '<';
     next.textContent = '>';
     status.textContent = 'Confirmed';
-    this.periodButton.textContent = 'total period';
+    this.periodButton.textContent = 'new day';
+    status.classList.add('link');
 
     this.buttons.append(selectStatus);
     selectStatus.append(prev, status, next);
