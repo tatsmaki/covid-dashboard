@@ -23,7 +23,7 @@ body {
 }
 
 .list {
-  height: 90%;
+  height: 80%;
   width: 100%;
   box-sizing: border-box;
   padding: 0;
@@ -69,7 +69,7 @@ body {
 
 .table-component {
   height: 40vh;
-  width: 49%;
+  width: 25vw;
   border: 1px black solid;
 }
 .table {
@@ -81,4 +81,9 @@ body {
   height: 40vh;
   width: 49%;
   border: 1px black solid;
+}
+
+.status-btns > span {
+  display: flex;
+  justify-content: space-between;
 }
