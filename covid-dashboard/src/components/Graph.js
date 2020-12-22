@@ -31,8 +31,8 @@ class Graph {
     this.world = world;
     this.svg = document.createElement('img');
     this.flag = document.createElement('canvas');
-    this.flag.width = 400;
-    this.flag.height = 200;
+    this.flag.width = 500;
+    this.flag.height = 250;
     this.ctx = this.flag.getContext('2d');
   }
 
@@ -58,10 +58,11 @@ class Graph {
 
   setFlag(url) {
     this.svg.src = url;
-    this.ctx.drawImage(this.svg, 0, 0, 400, 150);
+    this.ctx.drawImage(this.svg, 0, 0, 500, 200);
   }
 
   renderChart(countryData, status) {
+    this.currentTimeline = countryData;
     chartConfig.data.datasets.pop();
     const timestamps = Object.keys(countryData.timeline[status]);
     this.days = Object.values(countryData.timeline[status]);
@@ -71,10 +72,30 @@ class Graph {
     this.chart.update();
   }
 
+  changeView(date, status, view) {
+    chartConfig.data.datasets.pop();
+    let stat = status.toLowerCase();
+    if (stat === 'confirmed') stat = 'cases';
+    if (this.currentTimeline) {
+      const timestamps = Object.keys(this.currentTimeline.timeline[stat]);
+      this.days = Object.values(this.currentTimeline.timeline[stat]);
+      this.cutTimeline(timestamps);
+      const newChart = this.updateChart(this.currentTimeline.country);
+      chartConfig.data.datasets.push(newChart);
+    } else {
+      const timestamps = Object.keys(this.world[stat]);
+      this.days = Object.values(this.world[stat]);
+      this.cutTimeline(timestamps);
+      const newChart = this.updateChart('World');
+      chartConfig.data.datasets.push(newChart);
+    }
+    this.chart.update();
+  }
+
   cutTimeline(timestamps) {
     const time = [];
     this.days = this.days.reduceRight((acc, day, i) => {
-      // if ((this.days.length - 1 - i) % 5 === 0 || this.days.length === i - 1) {
+      // if ((this.days.length - 1 - i) % 3 === 0 || this.days.length === i - 1) {
       acc.push(day);
       time.push(timestamps[i]);
       // }

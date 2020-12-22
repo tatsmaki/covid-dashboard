@@ -179,6 +179,7 @@ class Page {
     this.STATUS = this.listButtons.case.textContent;
     this.VIEW = this.listButtons.valueType.value;
     this.countriesList.sortBy(this.TIME, this.STATUS, this.VIEW);
+    this.chartData.changeView(this.TIME, this.STATUS, this.VIEW);
   }
 
   updateList() {
