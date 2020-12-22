@@ -11,11 +11,8 @@ class Table {
     this.valueType = type;
   }
 
-  getAnotherPeriod() {
-    if (this.period === 'Total') {
-      return 'New';
-    }
-    return 'Total';
+  getPeriod() {
+    return this.period;
   }
 
   setAnotherPeriod() {

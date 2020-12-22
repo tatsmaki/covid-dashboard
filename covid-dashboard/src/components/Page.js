@@ -173,7 +173,7 @@ class Page {
     this.tableData.setAnotherPeriod();
     this.buttons.forEach((button) => {
       const btn = button;
-      btn.period.textContent = this.tableData.getAnotherPeriod();
+      btn.period.textContent = this.tableData.getPeriod();
     });
     this.tableData.renderTable(this.apiData.countriesDataObject[this.countryCode]);
     this.setView();
@@ -181,7 +181,7 @@ class Page {
   }
 
   setView() {
-    this.TIME = this.listButtons.period.textContent === 'Total' ? 'New' : 'Total';
+    this.TIME = this.listButtons.period.textContent;
     this.STATUS = this.listButtons.case.textContent;
     this.VIEW = this.listButtons.valueType.value;
     this.countriesList.sortBy(this.TIME, this.STATUS, this.VIEW);
