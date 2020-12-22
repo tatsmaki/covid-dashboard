@@ -72,12 +72,15 @@ class Page {
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
     // clone buttons for chart
-    this.chartComponent.append(...this.cloneButtons(), this.chartData.displayChart());
+    const chartControl = document.createElement('div');
+    chartControl.classList.add('chart-control');
+    chartControl.append(...this.cloneButtons());
+    this.chartComponent.append(chartControl, this.chartData.displayChart());
 
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
     this.awesomeMap.displayMap();
-//     this.awesomeMap = new Map();
+    //     this.awesomeMap = new Map();
     // clone buttons for map
     const mapControl = document.createElement('div');
     mapControl.classList.add('map-control');
@@ -170,7 +173,7 @@ class Page {
     this.tableData.setAnotherPeriod();
     this.buttons.forEach((button) => {
       const btn = button;
-      btn.period.textContent = this.tableData.getAnotherPeriod();
+      btn.period.textContent = this.tableData.getPeriod();
     });
     this.tableData.renderTable(this.apiData.countriesDataObject[this.countryCode]);
     this.setView();

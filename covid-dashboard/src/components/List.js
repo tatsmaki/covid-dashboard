@@ -25,10 +25,12 @@ class List {
       this.valueTypeElement.append(el);
     });
 
-    this.periodButton.classList.add('period-button');
-    this.valueTypeElement.classList.add('value-type');
+    this.periodButton.classList.add('period-button', 'btn', 'btn-sm', 'btn-outline-secondary');
+    this.valueTypeElement.classList.add('value-type', 'btn', 'btn-sm', 'btn-secondary', 'dropdown-toggle');
     this.buttons.classList.add('status-btns');
     status.classList.add('link');
+    prev.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+    next.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
 
     prev.textContent = '<';
     next.textContent = '>';
@@ -93,11 +95,11 @@ class List {
     flag.src = country.svg;
     name.textContent = country.Country;
 
-//     cases.textContent = country.TotalConfirmed;
-//     listItem.appendChild(wrap);
-//     wrap.appendChild(flag);
-//     wrap.appendChild(name);
-//     listItem.appendChild(cases);
+    //     cases.textContent = country.TotalConfirmed;
+    //     listItem.appendChild(wrap);
+    //     wrap.appendChild(flag);
+    //     wrap.appendChild(name);
+    //     listItem.appendChild(cases);
 
     cases.textContent = country[`${this.period}${this.status}`];
 
