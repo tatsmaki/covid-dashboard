@@ -1,12 +1,18 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
 main {
   display: flex;
   width: 100vw;
   height: 100vh;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  margin-top: 1vh;
   justify-content: space-evenly;
-  align-items: center;
 }
 
 .list-component {
@@ -30,6 +36,19 @@ main {
   margin: 0;
   overflow-y: scroll;
 }
+
+.list::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(255, 255, 255, 0);
+}
+.list::-webkit-scrollbar-button {
+  display: none;
+}
+.list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #d1d1d1;
+}
+
 .list > li {
   display: flex;
   justify-content: space-between;
@@ -93,6 +112,10 @@ main {
   width: 47vw;
   border: 1px black solid;
 }
+.chart-component > canvas {
+  width: 90% !important;
+  height: 80% !important;
+}
 
 #covid-map {
   height: 100%;
@@ -140,11 +163,11 @@ main {
 }
 
 footer {
-  position: absolute;
-  bottom: -120px;
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  align-items: center;
+  height: 5vh;
+  width: 100vw;
 }
 .git-list {
   display: flex;
