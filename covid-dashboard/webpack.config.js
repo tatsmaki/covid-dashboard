@@ -30,6 +30,10 @@ module.exports = {
       },
       { test: /\.(sc|sa|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
       {
+        test: /\.svg$/,
+        loader: 'file-loader',
+      },
+      {
         test: /\.geojson/,
         loader: 'json-loader'
       }

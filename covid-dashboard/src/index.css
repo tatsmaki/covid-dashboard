@@ -1,4 +1,4 @@
-body {
+main {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -137,4 +137,31 @@ body {
 .status-btns > span {
   display: flex;
   justify-content: space-between;
+}
+
+footer {
+  position: absolute;
+  bottom: -120px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.git-list {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+.git-list > li {
+  margin: 0 11%;
+}
+.git-list > li > a {
+  text-decoration: none;
+  color: black;
+}
+.rs-logo {
+  width: 50px;
+  height: 20px;
+  background-image: url("../src/assets/rs_school_js.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
