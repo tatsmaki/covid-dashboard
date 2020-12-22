@@ -31,8 +31,8 @@ module.exports = {
       { test: /\.(sc|sa|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
       {
         test: /\.geojson/,
-        loader: 'json-loader'
-      }
+        loader: 'json-loader',
+      },
     ],
   },
   plugins: [

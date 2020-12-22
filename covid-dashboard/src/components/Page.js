@@ -74,9 +74,9 @@ class Page {
     // clone buttons for chart
     this.chartComponent.append(...this.cloneButtons(), this.chartData.displayChart());
 
-    this.awesomeMap = new Map(this.apiData.map);
+    this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
-    this.awesomeM
+    this.awesomeMap.displayMap();
 //     this.awesomeMap = new Map();
     // clone buttons for map
     const mapControl = document.createElement('div');

@@ -49,7 +49,7 @@ class Map {
 
   style(feature) {
     const countryCode = feature.properties.iso_a2;
-    const countryInfo = this.apiData.get(countryCode);
+    const countryInfo = this.apiData[countryCode];
     return {
       fillColor: '#f00',
       fillOpacity: countryInfo ? this.getPercentage(countryInfo) : 0,
@@ -85,7 +85,7 @@ class Map {
   findMaxPercentage() {
     let maxPercentage = 0;
 
-    this.apiData.forEach((value) => {
+    Object.values(this.apiData).forEach((value) => {
       const countryInfo = value;
       const countryPercentage = (countryInfo.TotalConfirmed / countryInfo.population) * 100;
       if (countryPercentage > maxPercentage) maxPercentage = countryPercentage;
@@ -141,7 +141,7 @@ class Map {
       }
 
       const code = props.iso_a2;
-      const countryInfo = this.apiData.get(code);
+      const countryInfo = this.apiData[code];
       const percentage = countryInfo ? (countryInfo.TotalConfirmed / countryInfo.population) * 100
         : undefined;
 
