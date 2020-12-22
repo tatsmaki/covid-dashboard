@@ -72,14 +72,7 @@ class Page {
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
     // clone buttons for chart
-    const chartNode = this.listButtons.node.cloneNode(true);
-    const chartCasesLink = chartNode.getElementsByClassName('link')[0];
-    this.chartButtons = {
-      node: chartNode,
-      case: chartCasesLink,
-    };
-    this.chartButtons.node.addEventListener('click', this.statusHandler.bind(this));
-    this.chartComponent.append(this.chartButtons.node, this.chartData.displayChart());
+    this.chartComponent.append(...this.cloneButtons(), this.chartData.displayChart());
 
     this.awesomeMap = new Map();
     // clone buttons for map
