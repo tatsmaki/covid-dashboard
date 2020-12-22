@@ -68,7 +68,7 @@ class Page {
     this.chartData = new Graph(this.apiData.worldData);
     this.chartComponent.appendChild(this.chartData.displayChart());
 
-    this.awesomeMap = new Map();
+    this.awesomeMap = new Map(this.apiData.map);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
     this.awesomeMap.displayMap();
   }
