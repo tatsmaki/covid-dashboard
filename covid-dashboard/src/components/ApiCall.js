@@ -24,6 +24,7 @@ class ApiCall {
   }
 
   async requestSummary(retryCount = 0) {
+    // https://cors-anywhere.herokuapp.com/
     await fetch('https://api.covid19api.com/summary')
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)

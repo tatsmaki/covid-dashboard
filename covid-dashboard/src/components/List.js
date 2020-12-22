@@ -1,3 +1,5 @@
+import * as calcHelp from '../helpers/calcHelp';
+
 class List {
   constructor(countries) {
     this.countries = countries;
@@ -31,7 +33,7 @@ class List {
     prev.textContent = '<';
     next.textContent = '>';
     status.textContent = 'Confirmed';
-    this.periodButton.textContent = 'new day';
+    this.periodButton.textContent = 'Total';
     status.classList.add('link');
 
     this.buttons.append(selectStatus);
@@ -45,21 +47,37 @@ class List {
     };
   }
 
-  sortBy(date, status) {
-    this.date = date;
+  sortBy(date, status, view) {
+    this.view = view;
+    this.period = date;
     this.status = status;
-    this.countries = Object.values(this.countries)
+    const sortedCountries = Object.values(JSON.parse(JSON.stringify(this.countries)));
+    sortedCountries
+      .reduce((acc, cur) => {
+        const country = cur;
+        if (view.includes('relative')) {
+          country[`${date}${status}`] = calcHelp.calculateRelativeData(country, country.population, status, date);
+        }
+        if (view.includes('percentage')) {
+          country[`${date}${status}`] = calcHelp.calculatePercentageData(country, country.population, status, date);
+        }
+        acc.push(country);
+        return acc;
+      }, []);
+
+    sortedCountries
       .sort((a, b) => b[`${date}${status}`] - a[`${date}${status}`])
       .reduce((acc, cur) => {
         acc[cur.CountryCode] = cur;
         return acc;
       }, {});
+    this.countriesToCreate = { ...sortedCountries };
   }
 
   displayList() {
     this.list = document.createElement('ol');
     this.list.classList.add('list');
-    Object.values(this.countries).forEach((country) => this.createListItem(country));
+    Object.values(this.countriesToCreate).forEach((country) => this.createListItem(country));
     return this.list;
   }
 
@@ -74,7 +92,7 @@ class List {
     listItem.setAttribute('data-search', country.Country.toLowerCase());
     flag.src = country.svg;
     name.textContent = country.Country;
-    cases.textContent = country[`${this.date}${this.status}`];
+    cases.textContent = country[`${this.period}${this.status}`];
 
     listItem.append(nameWithFlag, cases);
     nameWithFlag.append(flag, name);

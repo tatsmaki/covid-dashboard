@@ -58,7 +58,7 @@ class Graph {
 
   setFlag(url) {
     this.svg.src = url;
-    this.ctx.drawImage(this.svg, 20, 20, 380, 180);
+    this.ctx.drawImage(this.svg, 0, 0, 400, 150);
   }
 
   renderChart(countryData, status) {
