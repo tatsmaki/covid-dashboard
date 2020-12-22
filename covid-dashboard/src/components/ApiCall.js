@@ -1,5 +1,7 @@
 import * as apiHelp from '../helpers/apiHelp';
 
+const fetch = require('node-fetch');
+
 class ApiCall {
   constructor() {
     this.countriesData = [];
