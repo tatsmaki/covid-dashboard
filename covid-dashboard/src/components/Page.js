@@ -80,7 +80,7 @@ class Page {
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
     this.awesomeMap.displayMap();
-//     this.awesomeMap = new Map();
+    //     this.awesomeMap = new Map();
     // clone buttons for map
     const mapControl = document.createElement('div');
     mapControl.classList.add('map-control');

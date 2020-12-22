@@ -95,11 +95,11 @@ class List {
     flag.src = country.svg;
     name.textContent = country.Country;
 
-//     cases.textContent = country.TotalConfirmed;
-//     listItem.appendChild(wrap);
-//     wrap.appendChild(flag);
-//     wrap.appendChild(name);
-//     listItem.appendChild(cases);
+    //     cases.textContent = country.TotalConfirmed;
+    //     listItem.appendChild(wrap);
+    //     wrap.appendChild(flag);
+    //     wrap.appendChild(name);
+    //     listItem.appendChild(cases);
 
     cases.textContent = country[`${this.period}${this.status}`];
 

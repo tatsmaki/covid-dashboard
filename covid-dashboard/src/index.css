@@ -11,14 +11,14 @@ body::-webkit-scrollbar {
 main {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 94vh;
   margin-top: 1vh;
   justify-content: space-evenly;
 }
 
 .list-component {
   display: flex;
-  height: 98vh;
+  height: 93vh;
   width: 25vw;
   flex-direction: column;
   justify-content: space-between;
@@ -55,7 +55,8 @@ main {
 .list > li {
   display: flex;
   justify-content: space-between;
-  height: 4vh;
+  /*height: 4vh;*/
+  margin-bottom: 10px;
 }
 .list > li::marker {
   content: "";
@@ -74,10 +75,10 @@ main {
 
 .main {
   display: flex;
-  height: 98vh;
+  height: 93vh;
   width: 73vw;
   flex-direction: column;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
 }
 
 .map-component {
@@ -87,6 +88,7 @@ main {
   justify-content: space-between;
   border: 1px black solid;
   padding: 5px;
+  margin-bottom: 19px;
 }
 .map-control {
   display: flex;
@@ -106,14 +108,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 40vh;
+  height: 35vh;
   width: 25vw;
   border: 1px black solid;
   padding: 5px;
 }
 .table-wrapper {
   display: flex;
-  height: 27vh;
+  height: 21vh;
   flex-direction: column;
 }
 .table-header{
@@ -123,9 +125,10 @@ main {
 .table-parameters {
   text-align: center;
   font-size: 14px;
+  margin-bottom: 23px;
 }
 .chart-component {
-  height: 40vh;
+  height: 35vh;
   width: 47vw;
   border: 1px black solid;
   padding: 5px;
@@ -207,7 +210,7 @@ footer {
 }
 .git-list > li > a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 .rs-logo {
   width: 50px;
@@ -215,4 +218,52 @@ footer {
   background-image: url("../src/assets/rs_school_js.svg");
   background-repeat: no-repeat;
   background-position: center;
-} 
+}
+
+@media only screen and (max-width: 900px) {
+  main {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*margin: 1vh;*/
+    align-items: center;
+  }
+  .main {
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .list-component {
+    width: 95%;
+    margin: 5px;
+  }
+  .list >li > span >img {
+    width: 5vw;
+  }
+  .main {
+    width: 100%;
+  }
+  .map-component {
+    width: 95%;
+    margin: 0;
+  }
+  .table-and-chart {
+    width: 100%;
+  }
+  .table-component {
+    width: 30%;
+  }
+  .chart-component {
+    width: 70%;
+  }
+  .chart-component > canvas {
+    width: 100% !important;
+  }
+  footer {
+    margin: 0 10px;
+  }
+  .git-list {
+    padding-left: 0;
+    margin-right: 100px;
+  }
+}
