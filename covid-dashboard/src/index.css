@@ -1,29 +1,31 @@
 @import '~bootstrap/scss/bootstrap';
+
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body::-webkit-scrollbar {
   display: none;
 }
 
 main {
   display: flex;
+  justify-content: space-evenly;
   width: 100vw;
   height: 94vh;
   margin-top: 1vh;
-  justify-content: space-evenly;
 }
 
 .list-component {
   display: flex;
-  height: 93vh;
-  width: 25vw;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px black solid;
+  height: 93vh;
+  width: 25vw;
   padding: 5px;
+  border: 1px black solid;
 }
 
 .search {
@@ -32,9 +34,9 @@ main {
 }
 
 .list {
+  box-sizing: border-box;
   height: 80%;
   width: 100%;
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
   overflow-y: scroll;
@@ -44,9 +46,11 @@ main {
   width: 10px;
   background-color: rgba(255, 255, 255, 0);
 }
+
 .list::-webkit-scrollbar-button {
   display: none;
 }
+
 .list::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: #d1d1d1;
@@ -55,45 +59,49 @@ main {
 .list > li {
   display: flex;
   justify-content: space-between;
-  /*height: 4vh;*/
   margin-bottom: 10px;
 }
+
 .list > li::marker {
   content: "";
 }
+
 .list > li:hover {
   cursor: default;
 }
+
 .list > li > span > img {
   height: 2vh;
   width: 2vw;
   margin-right: 5px;
 }
+
 .list > li.hide {
   display: none;
 }
 
 .main {
   display: flex;
+  flex-direction: column;
   height: 93vh;
   width: 73vw;
-  flex-direction: column;
-  /*justify-content: space-between;*/
 }
 
 .map-component {
   display: flex;
   flex-direction: column;
-  height: 56vh;
   justify-content: space-between;
-  border: 1px black solid;
+  height: 56vh;
   padding: 5px;
   margin-bottom: 19px;
+  border: 1px black solid;
 }
+
 .map-control {
   display: flex;
   justify-content: space-between;
 }
+
 .map-control > * {
   width: 25vw;
   margin: 0 2px;
@@ -113,35 +121,42 @@ main {
   border: 1px black solid;
   padding: 5px;
 }
+
 .table-wrapper {
   display: flex;
-  height: 21vh;
   flex-direction: column;
+  height: 21vh;
 }
-.table-header{
-  text-align: center;
+
+.table-header {
   font-weight: 700;
-}
-.table-parameters {
   text-align: center;
-  font-size: 14px;
-  margin-bottom: 23px;
 }
+
+.table-parameters {
+  margin-bottom: 23px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .chart-component {
   height: 35vh;
   width: 47vw;
-  border: 1px black solid;
   padding: 5px;
+  border: 1px black solid;
 }
+
 .chart-control {
   display: flex;
   justify-content: space-between;
   margin-bottom: 3vh;
 }
+
 .chart-control > * {
   width: 25vw;
   margin: 0 2px;
 }
+
 .chart-component > canvas {
   width: 90% !important;
   height: 80% !important;
@@ -154,20 +169,22 @@ main {
 .legend {
   display: flex;
   flex-direction: column;
+  padding: 10px;
   line-height: 18px;
   background-color: rgb(197, 194, 194);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  padding: 10px;
   border-radius: 5%;
 }
+
 .legend span {
   margin-bottom: 3px;
 }
+
 .legend i {
   width: 18px;
   height: 18px;
-  float: left;
   margin-right: 8px;
+  float: left;
   opacity: 0.7;
 }
 
@@ -176,9 +193,9 @@ main {
   font: 14px/16px Arial, Helvetica, sans-serif;
   background-color: rgb(197, 194, 194);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  /*border-radius: 5%;*/
   color: #191a1a;
 }
+
 .info h4 {
   margin: 0 0 5px;
   color: #777;
@@ -196,22 +213,26 @@ main {
 footer {
   display: flex;
   justify-content: space-around;
-  align-items: center;
   height: 5vh;
   width: 100vw;
+  align-items: center;
 }
+
 .git-list {
   display: flex;
   margin: 0;
   list-style: none;
 }
+
 .git-list > li {
   margin: 0 11%;
 }
+
 .git-list > li > a {
   text-decoration: none;
   color: white;
 }
+
 .rs-logo {
   width: 50px;
   height: 20px;
@@ -223,45 +244,55 @@ footer {
 @media only screen and (max-width: 900px) {
   main {
     flex-direction: column;
+    align-items: center;
     height: 100%;
     width: 100%;
-    /*margin: 1vh;*/
-    align-items: center;
   }
+
   .main {
-    width: 100%;
     align-items: center;
     justify-content: space-around;
+    width: 100%;
   }
+
   .list-component {
     width: 95%;
     margin: 5px;
   }
-  .list >li > span >img {
+
+  .list > li > span > img {
     width: 5vw;
   }
+
   .main {
     width: 100%;
   }
+
   .map-component {
     width: 95%;
     margin: 0;
   }
+
   .table-and-chart {
     width: 100%;
   }
+
   .table-component {
     width: 30%;
   }
+
   .chart-component {
     width: 70%;
   }
+
   .chart-component > canvas {
     width: 100% !important;
   }
+
   footer {
     margin: 0 10px;
   }
+
   .git-list {
     padding-left: 0;
     margin-right: 100px;
