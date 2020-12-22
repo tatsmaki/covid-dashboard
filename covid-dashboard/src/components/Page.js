@@ -34,7 +34,7 @@ class Page {
     this.listComponent.appendChild(this.search);
     main.append(this.mapComponent, tableAndChart);
     tableAndChart.append(this.tableComponent, this.chartComponent);
-    document.body.appendChild(fragment);
+    document.querySelector('main').appendChild(fragment);
   }
 
   async waitForApi() {

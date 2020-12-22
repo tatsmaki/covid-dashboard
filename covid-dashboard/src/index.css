@@ -1,12 +1,18 @@
 body {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 1vh;
   justify-content: space-evenly;
-  align-items: center;
 }
 
 .list-component {
@@ -30,6 +36,19 @@ body {
   margin: 0;
   overflow-y: scroll;
 }
+
+.list::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(255, 255, 255, 0);
+}
+.list::-webkit-scrollbar-button {
+  display: none;
+}
+.list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #d1d1d1;
+}
+
 .list > li {
   display: flex;
   justify-content: space-between;
@@ -96,6 +115,10 @@ body {
   width: 47vw;
   border: 1px black solid;
 }
+.chart-component > canvas {
+  width: 90% !important;
+  height: 80% !important;
+}
 
 #covid-map {
   height: 90%;
@@ -141,3 +164,30 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vh;
+  width: 100vw;
+}
+.git-list {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+.git-list > li {
+  margin: 0 11%;
+}
+.git-list > li > a {
+  text-decoration: none;
+  color: black;
+}
+.rs-logo {
+  width: 50px;
+  height: 20px;
+  background-image: url("../src/assets/rs_school_js.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+} 
