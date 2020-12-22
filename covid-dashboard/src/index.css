@@ -94,6 +94,46 @@ body {
   border: 1px black solid;
 }
 
+#covid-map {
+  height: 100%;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  line-height: 18px;
+  background-color: rgb(197, 194, 194);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 10px;
+  border-radius: 5%;
+}
+.legend span {
+  margin-bottom: 3px;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background-color: rgb(197, 194, 194);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5%;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.leaflet-container {
+  background-color: rgb(25,26,26);
+}
+
 .status-btns > span {
   display: flex;
   justify-content: space-between;
