@@ -3,7 +3,7 @@ import * as calcHelp from '../helpers/calcHelp';
 class Table {
   constructor(summary) {
     this.summary = summary;
-    this.period = 'New';
+    this.period = 'Total';
     this.valueType = 'absolute values';
   }
 
@@ -24,7 +24,7 @@ class Table {
 
   displayTable() {
     this.table = document.createElement('div');
-    this.table.classList.add('table');
+    this.table.classList.add('table-wrapper');
     this.renderTable();
     return this.table;
   }
@@ -52,7 +52,8 @@ class Table {
       deaths = calcHelp.calculatePercentageData(countryData, population, 'Deaths', this.period);
       recovered = calcHelp.calculatePercentageData(countryData, population, 'Recovered', this.period);
     }
-    this.table.innerHTML = `<span>${countryName} statistic for ${currentPeriod} with ${this.valueType}</span>
+    this.table.innerHTML = `<span class="table-header">${countryName} statistic </span>
+      <span class="table-parameters">( ${currentPeriod} and ${this.valueType} selected)</span>
       <span>Confirmed: ${confirmed}</span>
       <span>Deaths: ${deaths}</span>
       <span>Recovered: ${recovered}</span>`;

@@ -72,7 +72,10 @@ class Page {
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
     // clone buttons for chart
-    this.chartComponent.append(...this.cloneButtons(), this.chartData.displayChart());
+    const chartControl = document.createElement('div');
+    chartControl.classList.add('chart-control');
+    chartControl.append(...this.cloneButtons());
+    this.chartComponent.append(chartControl, this.chartData.displayChart());
 
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
@@ -178,7 +181,7 @@ class Page {
   }
 
   setView() {
-    this.TIME = this.listButtons.period.textContent;
+    this.TIME = this.listButtons.period.textContent === 'Total' ? 'New' : 'Total';
     this.STATUS = this.listButtons.case.textContent;
     this.VIEW = this.listButtons.valueType.value;
     this.countriesList.sortBy(this.TIME, this.STATUS, this.VIEW);

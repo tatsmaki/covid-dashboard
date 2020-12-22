@@ -25,15 +25,17 @@ class List {
       this.valueTypeElement.append(el);
     });
 
-    this.periodButton.classList.add('period-button');
-    this.valueTypeElement.classList.add('value-type');
+    this.periodButton.classList.add('period-button', 'btn', 'btn-sm', 'btn-outline-secondary');
+    this.valueTypeElement.classList.add('value-type', 'btn', 'btn-sm', 'btn-secondary', 'dropdown-toggle');
     this.buttons.classList.add('status-btns');
     status.classList.add('link');
+    prev.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+    next.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
 
     prev.textContent = '<';
     next.textContent = '>';
     status.textContent = 'Confirmed';
-    this.periodButton.textContent = 'Total';
+    this.periodButton.textContent = 'New';
     status.classList.add('link');
 
     this.buttons.append(selectStatus);
