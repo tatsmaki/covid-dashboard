@@ -17,6 +17,6 @@ describe('check api call', () => {
   });
 
   it('should check if countries data has country Belarus', () => {
-    expect(Array.from(Object.entries(apiCall.countriesDataObject)).find((item) => item[0] === 'BY')).toBeDefined();
+    expect(Array.from(Object.entries(apiCall.countriesDataObject)).find(([item]) => item === 'BY')).toBeDefined();
   });
 });
