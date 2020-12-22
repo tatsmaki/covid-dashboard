@@ -23,7 +23,7 @@ body {
 }
 
 .list {
-  height: 90%;
+  height: 80%;
   width: 100%;
   box-sizing: border-box;
   padding: 0;
@@ -61,6 +61,13 @@ body {
   height: 56vh;
   border: 1px black solid;
 }
+.map-control {
+  display: flex;
+  justify-content: space-between;
+}
+.map-control > * {
+  width: 25vw;
+}
 
 .table-and-chart {
   display: flex;
@@ -68,18 +75,22 @@ body {
 }
 
 .table-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 40vh;
-  width: 49%;
+  width: 25vw;
   border: 1px black solid;
 }
 .table {
   display: flex;
+  height: 27vh;
   flex-direction: column;
 }
 
 .chart-component {
   height: 40vh;
-  width: 49%;
+  width: 47vw;
   border: 1px black solid;
 }
 
@@ -121,4 +132,9 @@ body {
 
 .leaflet-container {
   background-color: rgb(25,26,26);
+}
+
+.status-btns > span {
+  display: flex;
+  justify-content: space-between;
 }

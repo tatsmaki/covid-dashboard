@@ -1,5 +1,7 @@
 import * as apiHelp from '../helpers/apiHelp';
 
+const fetch = require('node-fetch');
+
 class ApiCall {
   constructor() {
     this.countriesData = [];
@@ -75,7 +77,6 @@ class ApiCall {
   }
 
   sortData(data) {
-    data.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
     this.summaryData = data;
 
     const countriesData = data.Countries.filter((cases) => cases.TotalConfirmed > 27);
@@ -88,10 +89,10 @@ class ApiCall {
       return acc;
     }, {});
 
-    this.map = countriesData.reduce((acc, cur) => {
+    this.countriesDataObject = countriesData.reduce((acc, cur) => {
       const { pop } = population[cur.CountryCode];
       const { flag } = population[cur.CountryCode];
-      acc.set(cur.CountryCode, {
+      acc[cur.CountryCode] = {
         Country: cur.Country,
         CountryCode: cur.CountryCode,
         TotalConfirmed: cur.TotalConfirmed,
@@ -102,9 +103,9 @@ class ApiCall {
         NewRecovered: cur.NewRecovered,
         population: pop,
         svg: flag,
-      });
+      };
       return acc;
-    }, new Map());
+    }, {});
   }
 
   displayError(error) {
