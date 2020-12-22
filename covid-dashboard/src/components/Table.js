@@ -57,14 +57,6 @@ class Table {
       <span>Deaths: ${deaths}</span>
       <span>Recovered: ${recovered}</span>`;
   }
-
-  // calculateRelativeData(countryData, population, status) {
-  //   return Math.round((countryData[`${this.period}${status}`] * 100000) / population);
-  // }
-
-  // calculatePercentageData(countryData, population, status) {
-  //   return ((countryData[`${this.period}${status}`] * 100) / population).toFixed(2);
-  // }
 }
 
 export default Table;

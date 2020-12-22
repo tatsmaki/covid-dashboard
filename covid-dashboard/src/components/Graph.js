@@ -72,7 +72,7 @@ class Graph {
     this.chart.update();
   }
 
-  changeView(date, status, view) {
+  changeView(date, status) {
     chartConfig.data.datasets.pop();
     let stat = status.toLowerCase();
     if (stat === 'confirmed') stat = 'cases';
