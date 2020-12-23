@@ -189,6 +189,7 @@ class Page {
     this.VIEW = this.listButtons.valueType.value;
     this.countriesList.sortBy(this.TIME, this.STATUS, this.VIEW);
     this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], this.TIME, this.STATUS, this.VIEW);
+    this.awesomeMap.update(this.TIME, this.STATUS, this.VIEW);
   }
 
   updateList() {

@@ -166,6 +166,10 @@ main {
   height: 90%;
 }
 
+path {
+  transition: fill 200ms;
+}
+
 .legend {
   display: flex;
   flex-direction: column;
