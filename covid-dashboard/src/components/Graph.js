@@ -31,8 +31,6 @@ class Graph {
     this.world = world;
     this.svg = document.createElement('img');
     this.flag = document.createElement('canvas');
-    this.flag.width = 1000;
-    this.flag.height = 250;
     this.ctx = this.flag.getContext('2d');
   }
 
@@ -59,7 +57,10 @@ class Graph {
   setFlag(url, code) {
     this.countryCode = code;
     this.svg.src = url;
-    this.ctx.drawImage(this.svg, 0, 0, 540, 220);
+    const chartComponent = document.querySelector('.canvas');
+    this.ctx.canvas.width  = chartComponent.getAttribute('width');
+    this.ctx.canvas.height = chartComponent.getAttribute('height');
+    this.ctx.drawImage(this.svg, 0, 0, chartComponent.getAttribute('width') / 2, chartComponent.getAttribute('height') / 2);
   }
 
   setData(data) {
