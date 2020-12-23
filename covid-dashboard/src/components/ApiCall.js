@@ -5,6 +5,7 @@ import {
   worldTimelineUrl,
   countryTimelineUrl,
   daysInTimeline,
+  errorTextMessage,
 } from '../constants/const';
 
 const fetch = require('node-fetch');
@@ -117,6 +118,10 @@ class ApiCall {
 
   displayError(error) {
     this.error = error;
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error');
+    errorMessage.textContent = errorTextMessage;
+    document.body.appendChild(errorMessage);
   }
 }
 

@@ -402,3 +402,16 @@ footer {
 #hide {
   left: -100vw;
 }
+
+.error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding-top: 40vh;
+  z-index: 99999;
+  background: #191a1a;
+  color: white;
+}

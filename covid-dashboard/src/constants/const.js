@@ -17,3 +17,4 @@ export const covidSummaryUrl = 'https://api.covid19api.com/summary';
 export const worldTimelineUrl = 'https://disease.sh/v3/covid-19/historical/all';
 export const countryTimelineUrl = 'https://disease.sh/v3/covid-19/historical/';
 export const daysInTimeline = '?lastdays=300';
+export const errorTextMessage = 'Something went wrong with API. Try to reload page or check later.';
