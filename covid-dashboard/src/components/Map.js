@@ -1,12 +1,22 @@
 import countriesData from '../assets/geoJSON/ne_50m_admin_0_countries.geojson';
+import {
+  confirmedStatus,
+  defaultView,
+  relativeView,
+  newPeriod,
+  totalPeriod,
+  deathsStatus,
+  percentageView,
+  recoveredStatus,
+} from '../constants/const';
 
 const { L } = window;
 
 class Map {
   constructor(apiData) {
-    this.TIME = 'Total';
-    this.STATUS = 'Confirmed';
-    this.VIEW = 'absolute values';
+    this.TIME = totalPeriod;
+    this.STATUS = confirmedStatus;
+    this.VIEW = defaultView;
 
     this.apiData = apiData;
     this.mapContainer = document.createElement('div');
@@ -69,11 +79,11 @@ class Map {
 
   static getColor(status) {
     switch (status) {
-      case 'Confirmed':
+      case confirmedStatus:
         return 'red';
-      case 'Recovered':
+      case recoveredStatus:
         return 'green';
-      case 'Deaths':
+      case deathsStatus:
         return 'black';
       default:
         break;
@@ -107,8 +117,8 @@ class Map {
   }
 
   static getNum(countryInfo, time, status, view) {
-    let countryNum = countryInfo[`${time === 'New' ? 'New' : 'Total'}${status}`];
-    if (view !== 'absolute values') {
+    let countryNum = countryInfo[`${time === newPeriod ? newPeriod : totalPeriod}${status}`];
+    if (view !== defaultView) {
       countryNum = (countryNum / countryInfo.population) * 100;
     }
 
@@ -128,12 +138,12 @@ class Map {
       this.legendDiv.innerHTML = '';
 
       const levels = [0.2, 0.4, 0.6, 0.8, 1];
-      const coefficient = this.STATUS !== 'Deaths' ? 10 : 1000;
+      const coefficient = this.STATUS !== deathsStatus ? 10 : 1000;
       const grades = levels.map((percentage) => Math.round(this.maxNum * percentage * coefficient)
         / coefficient);
 
       grades.forEach((grade, ind) => {
-        this.legendDiv.innerHTML += `<span><i style="background: ${Map.getColor(this.STATUS)}; opacity: ${levels[ind]}"></i> ~${this.VIEW === 'percentage values, %' ? `${grade}%` : `${this.STATUS !== 'Deaths' || this.VIEW === 'absolute values' ? Math.round(grade) : grade}`}</span>`;
+        this.legendDiv.innerHTML += `<span><i style="background: ${Map.getColor(this.STATUS)}; opacity: ${levels[ind]}"></i> ~${this.VIEW === percentageView ? `${grade}%` : `${this.STATUS !== deathsStatus || this.VIEW === defaultView ? Math.round(grade) : grade}`}</span>`;
       });
     };
 
@@ -189,20 +199,20 @@ class Map {
 
       const code = props.iso_a2;
       const countryInfo = this.apiData[code];
-      const percentage = countryInfo ? (countryInfo[`${this.TIME === 'New' ? 'New' : 'Total'}${this.STATUS}`] / countryInfo.population) * 100
+      const percentage = countryInfo ? (countryInfo[`${this.TIME === newPeriod ? newPeriod : totalPeriod }${this.STATUS}`] / countryInfo.population) * 100
         : undefined;
 
       let info;
       switch (this.VIEW) {
-        case 'absolute values':
-          info = countryInfo ? countryInfo[`${this.TIME === 'New' ? 'New' : 'Total'}${this.STATUS}`] : undefined;
+        case defaultView:
+          info = countryInfo ? countryInfo[`${this.TIME === newPeriod ? newPeriod : totalPeriod}${this.STATUS}`] : undefined;
           break;
-        case 'relative values, per 100000':
-          info = countryInfo ? (countryInfo[`${this.TIME === 'New' ? 'New' : 'Total'}${this.STATUS}`] / countryInfo.population) * 100000
+        case relativeView:
+          info = countryInfo ? (countryInfo[`${this.TIME === newPeriod ? newPeriod : totalPeriod}${this.STATUS}`] / countryInfo.population) * 100000
             : undefined;
           info = Math.round(info);
           break;
-        case 'percentage values, %':
+        case percentageView:
           info = `${Math.round(percentage * 100) / 100}%`;
           break;
         default:
