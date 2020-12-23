@@ -58,7 +58,7 @@ class Graph {
     this.countryCode = code;
     this.svg.src = url;
     const chartComponent = document.querySelector('.canvas');
-    this.ctx.canvas.width  = chartComponent.getAttribute('width');
+    this.ctx.canvas.width = chartComponent.getAttribute('width');
     this.ctx.canvas.height = chartComponent.getAttribute('height');
     this.ctx.drawImage(this.svg, 0, 0, chartComponent.getAttribute('width') / 2, chartComponent.getAttribute('height') / 2);
   }

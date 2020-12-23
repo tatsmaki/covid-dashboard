@@ -6,6 +6,10 @@ import Map from './Map';
 
 class Page {
   constructor() {
+    this.TIME = 'Total';
+    this.STATUS = 'Confirmed';
+    this.VIEW = 'absolute values';
+
     this.displayPage();
     this.apiData = new ApiCall();
     this.buttons = [];
@@ -96,6 +100,7 @@ class Page {
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
     this.awesomeMap.displayMap();
+    this.isMapClick();
     // clone buttons for map
     const mapControl = document.createElement('div');
     mapControl.classList.add('map-control');
@@ -209,6 +214,29 @@ class Page {
     this.awesomeMap.update(this.TIME, this.STATUS, this.VIEW);
   }
 
+  isMapClick() {
+    const countryNode = document.querySelector('.pseudoCountry');
+    const observer = new MutationObserver(this.mutationRecords.bind(this));
+    observer.observe(countryNode, { childList: true });
+  }
+
+  async mutationRecords(e) {
+    this.countryCode = e[0].target.innerHTML;
+
+    this.tableData.renderTable(this.apiData.countriesDataObject[this.countryCode]);
+
+    this.chartData.setFlag(
+      this.apiData.countriesDataObject[this.countryCode].svg,
+      this.countryCode,
+    );
+
+    if (!this.apiData[`${this.countryCode}chart`]) {
+      await this.apiData.requestCountryTimeline(this.countryCode);
+    }
+
+    this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], this.TIME, this.STATUS, this.VIEW);
+  }
+
   updateList() {
     this.list.removeEventListener('click', this.clickHandler);
     this.list.remove();
@@ -234,6 +262,11 @@ class Page {
   setFullscreenSection(e) {
     const sectionWrapperElement = e.target.closest('.component-wrapper');
     sectionWrapperElement.classList.add('full-screen-wrapper', 'bg-dark');
+
+    if (sectionWrapperElement.classList.contains('map-component')) {
+      this.awesomeMap.reSize();
+    }
+
     e.target.classList.add('close-full-screen-btn');
     e.target.removeEventListener('click', this.setFullscreenSection);
     e.target.addEventListener('click', this.setNotFullscreenSection.bind(this));

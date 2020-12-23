@@ -19,6 +19,12 @@ class Map {
     this.highlightFeature = this.highlightFeature.bind(this);
     this.createLegend = this.createLegend.bind(this);
     this.createInfoControl = this.createInfoControl.bind(this);
+    this.countryClick = this.countryClick.bind(this);
+
+    this.pseudoCountryDiv = document.createElement('div');
+    this.pseudoCountryDiv.classList.add('pseudoCountry');
+    this.pseudoCountryDiv.style.display = 'none';
+    document.body.appendChild(this.pseudoCountryDiv);
   }
 
   static getAccessToken() {
@@ -162,6 +168,7 @@ class Map {
     layer.on({
       mouseover: this.highlightFeature,
       mouseout: this.resetHighlight,
+      click: this.countryClick,
     });
   }
 
@@ -218,6 +225,15 @@ class Map {
     this.maxNum = this.findMaxNumber(this.TIME, this.STATUS, this.VIEW);
     this.legend.update();
     this.geoJSON.setStyle(this.style);
+  }
+
+  countryClick(fragment) {
+    const code = fragment.target.feature.properties.iso_a2;
+    this.pseudoCountryDiv.innerHTML = code;
+  }
+
+  reSize() {
+    this.map.invalidateSize();
   }
 }
 
