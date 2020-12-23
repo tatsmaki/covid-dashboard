@@ -93,7 +93,7 @@ main {
 }
 
 .list > li:hover {
-  cursor: default;
+  cursor: pointer;
 }
 
 .list > li > span > img {
