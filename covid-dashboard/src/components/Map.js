@@ -122,7 +122,7 @@ class Map {
       this.legendDiv.innerHTML = '';
 
       const levels = [0.2, 0.4, 0.6, 0.8, 1];
-      const coefficient = this.STATUS === 'Deaths' ? 1000 : 10;
+      const coefficient = this.STATUS !== 'Deaths' ? 10 : 1000;
       const grades = levels.map((percentage) => Math.round(this.maxNum * percentage * coefficient)
         / coefficient);
 
