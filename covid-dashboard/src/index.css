@@ -93,7 +93,7 @@ main {
   justify-content: space-between;
   height: 56vh;
   padding: 5px;
-  margin-bottom: 19px;
+  margin-bottom: 13px;
   border: 1px black solid;
 }
 
@@ -116,7 +116,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 35vh;
+  height: 36vh;
   width: 25vw;
   border: 1px black solid;
   padding: 5px;
@@ -126,21 +126,18 @@ main {
   display: flex;
   flex-direction: column;
   height: 21vh;
+  font-size: 15px;
 }
 
 .table-header {
+  margin-bottom: 7px;
+  font-size: 17px;
   font-weight: 700;
   text-align: center;
 }
 
-.table-parameters {
-  margin-bottom: 23px;
-  font-size: 14px;
-  text-align: center;
-}
-
 .chart-component {
-  height: 35vh;
+  height: 36vh;
   width: 47vw;
   padding: 5px;
   border: 1px black solid;
@@ -270,7 +267,7 @@ footer {
 
   .map-component {
     width: 95%;
-    margin: 0;
+    margin: 0 0 5px 0;
   }
 
   .table-and-chart {
@@ -279,6 +276,24 @@ footer {
 
   .table-component {
     width: 30%;
+    overflow-y: scroll;
+  }
+  .table-component::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  .table-component::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .table-component::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #d1d1d1;
+  }
+
+  .table-header {
+    margin-bottom: 7px;
   }
 
   .chart-component {
