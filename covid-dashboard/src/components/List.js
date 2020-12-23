@@ -1,4 +1,13 @@
 import * as calcHelp from '../helpers/calcHelp';
+import {
+  confirmedStatus,
+  defaultView,
+  navigateNext,
+  navigatePrev,
+  percentageView,
+  relativeView,
+  totalPeriod,
+} from '../constants/const';
 
 class List {
   constructor(countries) {
@@ -14,7 +23,7 @@ class List {
     const next = document.createElement('button');
     const status = document.createElement('span');
 
-    const valueArray = ['absolute values', 'relative values, per 100000', 'percentage values, %'];
+    const valueArray = [defaultView, relativeView, percentageView];
     valueArray.forEach((item) => {
       const el = document.createElement('option');
       el.value = item;
@@ -32,10 +41,10 @@ class List {
     prev.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
     next.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
 
-    prev.textContent = '<';
-    next.textContent = '>';
-    status.textContent = 'Confirmed';
-    this.periodButton.textContent = 'Total';
+    prev.textContent = navigatePrev;
+    next.textContent = navigateNext;
+    status.textContent = confirmedStatus;
+    this.periodButton.textContent = totalPeriod;
     status.classList.add('link');
 
     this.buttons.append(selectStatus);

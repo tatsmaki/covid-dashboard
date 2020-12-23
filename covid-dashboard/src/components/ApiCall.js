@@ -1,4 +1,11 @@
 import * as apiHelp from '../helpers/apiHelp';
+import {
+  populationUrl,
+  covidSummaryUrl,
+  worldTimelineUrl,
+  countryTimelineUrl,
+  daysInTimeline,
+} from '../constants/const';
 
 const fetch = require('node-fetch');
 
@@ -9,7 +16,7 @@ class ApiCall {
   }
 
   async getPopulation(retryCount = 0) {
-    await fetch('https://restcountries.eu/rest/v2/all?fields=population;flag;alpha2Code')
+    await fetch(populationUrl)
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {
@@ -26,7 +33,7 @@ class ApiCall {
   }
 
   async requestSummary(retryCount = 0) {
-    await fetch('https://api.covid19api.com/summary')
+    await fetch(covidSummaryUrl)
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {
@@ -43,7 +50,7 @@ class ApiCall {
   }
 
   async requestWorldData(retryCount = 0) {
-    await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=300')
+    await fetch(`${worldTimelineUrl}${daysInTimeline}`)
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {
@@ -60,7 +67,7 @@ class ApiCall {
   }
 
   async requestCountryTimeline(url, retryCount = 0) {
-    await fetch(`https://disease.sh/v3/covid-19/historical/${url}?lastdays=300`)
+    await fetch(`${countryTimelineUrl}${url}${daysInTimeline}`)
       .then(apiHelp.checkStatus)
       .then(apiHelp.toJson)
       .then((data) => {

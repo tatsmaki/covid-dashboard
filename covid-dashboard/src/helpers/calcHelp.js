@@ -1,7 +1,9 @@
+import { hundreedPercent, relativeNumber } from '../constants/const';
+
 export function calculateRelativeData(countryData, population, status, period) {
-  return Math.round((countryData[`${period}${status}`] * 100000) / population);
+  return Math.round((countryData[`${period}${status}`] * relativeNumber) / population);
 }
 
 export function calculatePercentageData(countryData, population, status, period) {
-  return ((countryData[`${period}${status}`] * 100) / population).toFixed(3);
+  return ((countryData[`${period}${status}`] * hundreedPercent) / population).toFixed(3);
 }

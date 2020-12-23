@@ -3,6 +3,13 @@ import Table from './Table';
 import List from './List';
 import Graph from './Graph';
 import Map from './Map';
+import {
+  confirmedStatus,
+  deathsStatus,
+  defaultView,
+  recoveredStatus,
+  totalPeriod,
+} from '../constants/const';
 
 class Page {
   constructor() {
@@ -69,7 +76,7 @@ class Page {
       this.listButtons.node,
     );
     // sort list by default
-    this.countriesList.sortBy('Total', 'Confirmed', 'absolute');
+    this.countriesList.sortBy(totalPeriod, confirmedStatus, defaultView);
     this.list = this.countriesList.displayList();
     this.list.addEventListener('click', this.clickHandler.bind(this));
     this.search.addEventListener('input', this.inputHandler.bind(this));
@@ -142,18 +149,18 @@ class Page {
 
   nextStatus() {
     switch (this.listButtons.case.textContent) {
-      case 'Confirmed': this.renderStatus('Recovered'); break;
-      case 'Recovered': this.renderStatus('Deaths'); break;
-      case 'Deaths': this.renderStatus('Confirmed'); break;
+      case confirmedStatus: this.renderStatus(recoveredStatus); break;
+      case recoveredStatus: this.renderStatus(deathsStatus); break;
+      case deathsStatus: this.renderStatus(confirmedStatus); break;
       default: break;
     }
   }
 
   prevStatus() {
     switch (this.listButtons.case.textContent) {
-      case 'Confirmed': this.renderStatus('Deaths'); break;
-      case 'Deaths': this.renderStatus('Recovered'); break;
-      case 'Recovered': this.renderStatus('Confirmed'); break;
+      case confirmedStatus: this.renderStatus(deathsStatus); break;
+      case deathsStatus: this.renderStatus(recoveredStatus); break;
+      case recoveredStatus: this.renderStatus(confirmedStatus); break;
       default: break;
     }
   }
