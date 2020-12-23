@@ -28,7 +28,6 @@ class Table {
 
   renderTable(countryData = this.summary) {
     const worldPopulation = 7827000000;
-    const currentPeriod = this.period === 'Total' ? `${this.period.toLowerCase()} period` : `${this.period.toLowerCase()} day`;
     const countryName = countryData.Country ? countryData.Country : 'World';
     const population = countryData.population ? countryData.population : worldPopulation;
     let confirmed;

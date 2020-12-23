@@ -18,6 +18,10 @@ main {
   margin-top: 1vh;
 }
 
+.btn-sm {
+  margin-bottom: 5px;
+}
+
 .list-component {
   display: flex;
   flex-direction: column;
@@ -28,9 +32,31 @@ main {
   border: 1px black solid;
 }
 
+.search-full-section {
+  display: flex;
+  margin-bottom: 5px;
+}
+
 .search {
-  height: 5%;
+  height: 100%;
+  width: 90%;
   padding-left: 10px;
+}
+
+.full-screen-btn {
+  width: 12% !important;
+  height: 35px;
+  padding: 0;
+  background: none;
+  background-size: contain;
+  background-image: url("../src/assets/ic-open-in-new-48px.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+}
+
+.close-full-screen-btn {
+  background-image: url("../src/assets/ic-close-48px.svg");
 }
 
 .list {
@@ -100,11 +126,16 @@ main {
 .map-control {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 .map-control > * {
   width: 25vw;
   margin: 0 2px;
+}
+
+.full-screen-wrapper #covid-map {
+  height: 1000px;
 }
 
 .table-and-chart {
@@ -120,6 +151,14 @@ main {
   width: 25vw;
   border: 1px black solid;
   padding: 5px;
+}
+
+.dropdown-full-section {
+  display: flex;
+}
+
+.dropdown-full-section > .value-type {
+  width: 100%;
 }
 
 .table-wrapper {
@@ -154,9 +193,21 @@ main {
   margin: 0 2px;
 }
 
+.chart-control > .value-type {
+  width: 100%;
+}
+
 .chart-component > canvas {
   width: 90% !important;
   height: 80% !important;
+}
+
+.full-screen-wrapper canvas {
+  height: 40% !important;
+}
+
+.table-component .full-screen-btn, .chart-component .full-screen-btn {
+  width: 40% !important;
 }
 
 #covid-map {
@@ -278,6 +329,7 @@ footer {
     width: 30%;
     overflow-y: scroll;
   }
+
   .table-component::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(255, 255, 255, 0);
@@ -290,6 +342,12 @@ footer {
   .table-component::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: #d1d1d1;
+  }
+
+  .dropdown-full-section {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .table-header {
@@ -312,4 +370,16 @@ footer {
     padding-left: 0;
     margin-right: 100px;
   }
+}
+
+.full-screen-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 95vh;
 }

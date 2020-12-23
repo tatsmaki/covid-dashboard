@@ -15,23 +15,29 @@ class Page {
     const fragment = document.createDocumentFragment();
     this.listComponent = document.createElement('div');
     this.search = document.createElement('input');
+    this.fullScreenBtn = document.createElement('button');
+    const searchFullScreenSection = document.createElement('div');
     const main = document.createElement('div');
     this.mapComponent = document.createElement('div');
     const tableAndChart = document.createElement('div');
     this.tableComponent = document.createElement('div');
     this.chartComponent = document.createElement('div');
 
-    this.listComponent.classList.add('list-component');
+    this.listComponent.classList.add('list-component', 'component-wrapper');
+    searchFullScreenSection.classList.add('search-full-section');
     this.search.classList.add('search');
     this.search.placeholder = 'search';
+    this.fullScreenBtn.classList.add('full-screen-btn');
+    this.fullScreenBtn.addEventListener('click', this.setFullscreenSection.bind(this));
     main.classList.add('main');
-    this.mapComponent.classList.add('map-component');
+    this.mapComponent.classList.add('map-component', 'component-wrapper');
     tableAndChart.classList.add('table-and-chart');
-    this.tableComponent.classList.add('table-component');
-    this.chartComponent.classList.add('chart-component');
+    this.tableComponent.classList.add('table-component', 'component-wrapper');
+    this.chartComponent.classList.add('chart-component', 'component-wrapper');
 
     fragment.append(this.listComponent, main);
-    this.listComponent.appendChild(this.search);
+    searchFullScreenSection.append(this.search, this.fullScreenBtn);
+    this.listComponent.appendChild(searchFullScreenSection);
     main.append(this.mapComponent, tableAndChart);
     tableAndChart.append(this.tableComponent, this.chartComponent);
     document.querySelector('main').appendChild(fragment);
@@ -67,7 +73,14 @@ class Page {
 
     this.tableData = new Table(this.apiData.summaryData.Global);
     // clone buttons for table
-    this.tableComponent.append(...this.cloneButtons(), this.tableData.displayTable());
+    const dropdownFullScreenSection = document.createElement('div');
+    dropdownFullScreenSection.classList.add('dropdown-full-section');
+    const cloneTableButtons = this.cloneButtons();
+    const fullScreenTableBtn = this.fullScreenBtn.cloneNode(true);
+    dropdownFullScreenSection.append(cloneTableButtons[0], fullScreenTableBtn);
+    fullScreenTableBtn.addEventListener('click', this.setFullscreenSection.bind(this));
+    this.tableComponent.append(dropdownFullScreenSection, cloneTableButtons[1],
+      cloneTableButtons[2], this.tableData.displayTable());
 
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
@@ -75,7 +88,9 @@ class Page {
     // clone buttons for chart
     const chartControl = document.createElement('div');
     chartControl.classList.add('chart-control');
-    chartControl.append(...this.cloneButtons());
+    const fullScreenChartBtn = this.fullScreenBtn.cloneNode(true);
+    fullScreenChartBtn.addEventListener('click', this.setFullscreenSection.bind(this));
+    chartControl.append(...this.cloneButtons(), fullScreenChartBtn);
     this.chartComponent.append(chartControl, this.chartData.displayChart());
 
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
@@ -84,7 +99,9 @@ class Page {
     // clone buttons for map
     const mapControl = document.createElement('div');
     mapControl.classList.add('map-control');
-    mapControl.append(...this.cloneButtons());
+    const fullScreenMapBtn = this.fullScreenBtn.cloneNode(true);
+    fullScreenMapBtn.addEventListener('click', this.setFullscreenSection.bind(this));
+    mapControl.append(...this.cloneButtons(), fullScreenMapBtn);
     this.mapComponent.append(mapControl);
   }
 
@@ -211,6 +228,22 @@ class Page {
       this.setView();
       this.updateList();
     }
+  }
+
+  setFullscreenSection(e) {
+    const sectionWrapperElement = e.target.closest('.component-wrapper');
+    sectionWrapperElement.classList.add('full-screen-wrapper', 'bg-dark');
+    e.target.classList.add('close-full-screen-btn');
+    e.target.removeEventListener('click', this.setFullscreenSection);
+    e.target.addEventListener('click', this.setNotFullscreenSection.bind(this));
+  }
+
+  setNotFullscreenSection(e) {
+    const sectionWrapperElement = e.target.closest('.component-wrapper');
+    sectionWrapperElement.classList.remove('full-screen-wrapper', 'bg-dark');
+    e.target.classList.remove('close-full-screen-btn');
+    e.target.addEventListener('click', this.setFullscreenSection.bind(this));
+    e.target.removeEventListener('click', this.setNotFullscreenSection);
   }
 }
 
