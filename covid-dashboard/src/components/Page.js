@@ -79,7 +79,8 @@ class Page {
     const fullScreenTableBtn = this.fullScreenBtn.cloneNode(true);
     dropdownFullScreenSection.append(cloneTableButtons[0], fullScreenTableBtn);
     fullScreenTableBtn.addEventListener('click', this.setFullscreenSection.bind(this));
-    this.tableComponent.append(dropdownFullScreenSection, cloneTableButtons[1], cloneTableButtons[2], this.tableData.displayTable());
+    this.tableComponent.append(dropdownFullScreenSection, cloneTableButtons[1],
+      cloneTableButtons[2], this.tableData.displayTable());
 
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
@@ -228,6 +229,7 @@ class Page {
       this.updateList();
     }
   }
+
   setFullscreenSection(e) {
     const sectionWrapperElement = e.target.closest('.component-wrapper');
     sectionWrapperElement.classList.add('full-screen-wrapper', 'bg-dark');
@@ -235,6 +237,7 @@ class Page {
     e.target.removeEventListener('click', this.setFullscreenSection);
     e.target.addEventListener('click', this.setNotFullscreenSection.bind(this));
   }
+
   setNotFullscreenSection(e) {
     const sectionWrapperElement = e.target.closest('.component-wrapper');
     sectionWrapperElement.classList.remove('full-screen-wrapper', 'bg-dark');

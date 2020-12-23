@@ -134,6 +134,10 @@ main {
   margin: 0 2px;
 }
 
+.full-screen-wrapper #covid-map {
+  height: 1000px;
+}
+
 .table-and-chart {
   display: flex;
   justify-content: space-between;
@@ -196,6 +200,10 @@ main {
 .chart-component > canvas {
   width: 90% !important;
   height: 80% !important;
+}
+
+.full-screen-wrapper canvas {
+  height: 40% !important;
 }
 
 .table-component .full-screen-btn, .chart-component .full-screen-btn {
