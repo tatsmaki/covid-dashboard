@@ -110,13 +110,13 @@ class Graph {
     }
     if (view.includes('relative')) {
       this.days = this.days.reduce((acc, cur) => {
-        acc.push(Math.round((cur * 1000000) / pop));
+        acc.push((cur * 1000000) / pop);
         return acc;
       }, []);
     }
     if (view.includes('percentage')) {
       this.days = this.days.reduce((acc, cur) => {
-        acc.push(((cur * 100) / pop).toFixed(3));
+        acc.push(((cur * 100) / pop));
         return acc;
       }, []);
     }
@@ -126,7 +126,11 @@ class Graph {
   cutTimeline(timestamps) {
     const time = [];
     this.days = this.days.reduceRight((acc, day, i) => {
-      acc.push(Math.abs(day));
+      if (this.days[i - 1] && day < this.days[i - 1]) {
+        acc.push(this.days[i - 1]);
+      } else {
+        acc.push(day);
+      }
       time.push(new Date(timestamps[i]));
       return acc;
     }, []);
