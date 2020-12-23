@@ -395,7 +395,7 @@ footer {
   bottom: 0;
   z-index: 100000;
   color: black;
-  background: none !important;
+  background: rgb(94, 93, 93) !important;
   transition: left 0.5s;
 }
 
