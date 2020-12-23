@@ -14,7 +14,7 @@ const chartConfig = {
     },
     scales: {
       xAxes: [{
-        // type: 'time',
+        type: 'time',
         distribution: 'series',
       }],
       yAxes: [{
@@ -31,7 +31,7 @@ class Graph {
     this.world = world;
     this.svg = document.createElement('img');
     this.flag = document.createElement('canvas');
-    this.flag.width = 500;
+    this.flag.width = 1000;
     this.flag.height = 250;
     this.ctx = this.flag.getContext('2d');
   }
@@ -56,35 +56,34 @@ class Graph {
     this.chart.update();
   }
 
-  setFlag(url) {
+  setFlag(url, code) {
+    this.countryCode = code;
     this.svg.src = url;
-    this.ctx.drawImage(this.svg, 0, 0, 500, 200);
+    this.ctx.drawImage(this.svg, 0, 0, 540, 220);
   }
 
-  renderChart(countryData, status) {
+  setData(data) {
+    this.countriesDataObject = data;
+  }
+
+  renderChart(countryData, date, status, view) {
     this.currentTimeline = countryData;
-    chartConfig.data.datasets.pop();
-    const timestamps = Object.keys(countryData.timeline[status]);
-    this.days = Object.values(countryData.timeline[status]);
-    this.cutTimeline(timestamps);
-    const newCountry = this.updateChart(countryData.country);
-    chartConfig.data.datasets.push(newCountry);
-    this.chart.update();
-  }
-
-  changeView(date, status) {
     chartConfig.data.datasets.pop();
     let stat = status.toLowerCase();
     if (stat === 'confirmed') stat = 'cases';
     if (this.currentTimeline) {
       const timestamps = Object.keys(this.currentTimeline.timeline[stat]);
       this.days = Object.values(this.currentTimeline.timeline[stat]);
+      this.days = this.checkDate(date);
+      this.days = this.checkView(view);
       this.cutTimeline(timestamps);
       const newChart = this.updateChart(this.currentTimeline.country);
       chartConfig.data.datasets.push(newChart);
     } else {
       const timestamps = Object.keys(this.world[stat]);
       this.days = Object.values(this.world[stat]);
+      this.days = this.checkDate(date);
+      this.days = this.checkView(view);
       this.cutTimeline(timestamps);
       const newChart = this.updateChart('World');
       chartConfig.data.datasets.push(newChart);
@@ -92,13 +91,43 @@ class Graph {
     this.chart.update();
   }
 
+  checkDate(date) {
+    if (date === 'New') {
+      this.days = this.days.reduce((acc, cur, i) => {
+        if (i > 0) acc.push(cur - this.days[i - 1]);
+        return acc;
+      }, [0]);
+    }
+    return this.days;
+  }
+
+  checkView(view) {
+    let pop;
+    if (this.currentTimeline) {
+      pop = this.countriesDataObject[this.countryCode].population;
+    } else {
+      pop = 7827000000;
+    }
+    if (view.includes('relative')) {
+      this.days = this.days.reduce((acc, cur) => {
+        acc.push(Math.round((cur * 1000000) / pop));
+        return acc;
+      }, []);
+    }
+    if (view.includes('percentage')) {
+      this.days = this.days.reduce((acc, cur) => {
+        acc.push(((cur * 100) / pop).toFixed(3));
+        return acc;
+      }, []);
+    }
+    return this.days;
+  }
+
   cutTimeline(timestamps) {
     const time = [];
     this.days = this.days.reduceRight((acc, day, i) => {
-      // if ((this.days.length - 1 - i) % 3 === 0 || this.days.length === i - 1) {
-      acc.push(day);
-      time.push(timestamps[i]);
-      // }
+      acc.push(Math.abs(day));
+      time.push(new Date(timestamps[i]));
       return acc;
     }, []);
     return time;
@@ -109,14 +138,15 @@ class Graph {
     if (this.svg.src) {
       fillPattern = this.ctx.createPattern(this.flag, 'no-repeat');
     } else {
-      fillPattern = '#128533';
+      fillPattern = '#ABCDEF50';
     }
     return {
       label: labelName,
       data: this.days.reverse(),
       backgroundColor: fillPattern,
-      borderColor: '#000000',
-      borderWidth: 1,
+      borderColor: '#fff',
+      borderDash: [5, 2],
+      borderWidth: 2,
       pointRadius: 0,
     };
   }
