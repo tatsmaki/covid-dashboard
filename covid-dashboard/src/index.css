@@ -66,6 +66,7 @@ main {
   padding: 0;
   margin: 0;
   overflow-y: scroll;
+  padding: 0 3px;
 }
 
 .list::-webkit-scrollbar {
@@ -395,7 +396,6 @@ footer {
   bottom: 0;
   z-index: 100000;
   color: black;
-  background: rgb(94, 93, 93) !important;
   transition: left 0.5s;
 }
 

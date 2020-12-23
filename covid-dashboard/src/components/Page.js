@@ -62,7 +62,7 @@ class Page {
     });
     keyboard.superUsefulFieldToMakeEslintHappy = null;
     simple.addEventListener('click', (event) => {
-      if (event.target.textContent === '@') {
+      if (event.target.textContent === '@' || event.target.textContent === '< enter') {
         this.search.value = this.search.value.replace(/@/g, '');
         simple.id = 'hide';
         this.inputHandler();
