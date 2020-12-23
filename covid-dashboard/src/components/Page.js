@@ -71,6 +71,7 @@ class Page {
 
     await this.apiData.requestWorldData();
     this.chartData = new Graph(this.apiData.worldData);
+    this.chartData.setData(this.apiData.countriesDataObject);
     // clone buttons for chart
     const chartControl = document.createElement('div');
     chartControl.classList.add('chart-control');
@@ -80,7 +81,6 @@ class Page {
     this.awesomeMap = new Map(this.apiData.countriesDataObject);
     this.mapComponent.appendChild(this.awesomeMap.mapContainer);
     this.awesomeMap.displayMap();
-    //     this.awesomeMap = new Map();
     // clone buttons for map
     const mapControl = document.createElement('div');
     mapControl.classList.add('map-control');
@@ -152,9 +152,12 @@ class Page {
       if (!this.apiData[`${this.countryCode}chart`]) {
         await this.apiData.requestCountryTimeline(this.countryCode);
       }
-      const status = 'cases';
-      this.chartData.setFlag(this.apiData.countriesDataObject[this.countryCode].svg);
-      this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], status);
+      this.chartData.setFlag(
+        this.apiData.countriesDataObject[this.countryCode].svg,
+        this.countryCode,
+      );
+      this.setView();
+      this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], this.TIME, this.STATUS, this.VIEW);
     }
   }
 
@@ -185,7 +188,7 @@ class Page {
     this.STATUS = this.listButtons.case.textContent;
     this.VIEW = this.listButtons.valueType.value;
     this.countriesList.sortBy(this.TIME, this.STATUS, this.VIEW);
-    this.chartData.changeView(this.TIME, this.STATUS, this.VIEW);
+    this.chartData.renderChart(this.apiData[`${this.countryCode}chart`], this.TIME, this.STATUS, this.VIEW);
   }
 
   updateList() {
@@ -194,6 +197,7 @@ class Page {
     this.list = this.countriesList.displayList();
     this.list.addEventListener('click', this.clickHandler.bind(this));
     this.listComponent.appendChild(this.list);
+    this.inputHandler();
   }
 
   clickTypeValueOption(e) {

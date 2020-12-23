@@ -50,7 +50,7 @@ class Table {
       recovered = calcHelp.calculatePercentageData(countryData, population, 'Recovered', this.period);
     }
     this.table.innerHTML = `<span class="table-header">${countryName} statistic </span>
-      <span class="table-parameters">( ${currentPeriod} and ${this.valueType} selected)</span>
+      <span class="table-parameters">( ${currentPeriod} and ${this.valueType} selected )</span>
       <span>Confirmed: ${confirmed}</span>
       <span>Deaths: ${deaths}</span>
       <span>Recovered: ${recovered}</span>`;
