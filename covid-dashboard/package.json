@@ -39,7 +39,8 @@
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
     "fast-async": "^6.3.8",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "simple-keyboard": "^2.32.68"
   },
   "description": ""
 }
