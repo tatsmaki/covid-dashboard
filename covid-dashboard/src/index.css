@@ -1,0 +1,417 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 94vh;
+  margin-top: 1vh;
+}
+
+.btn-sm {
+  margin-bottom: 5px;
+}
+
+.list-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 93vh;
+  width: 25vw;
+  padding: 5px;
+  border: 1px black solid;
+}
+
+.search-full-section {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.search {
+  height: 100%;
+  width: 90%;
+  padding-left: 10px;
+}
+
+.full-screen-btn {
+  width: 12% !important;
+  height: 35px;
+  padding: 0;
+  background: none;
+  background-size: contain;
+  background-image: url("../src/assets/ic-open-in-new-48px.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+}
+
+.close-full-screen-btn {
+  background-image: url("../src/assets/ic-close-48px.svg");
+}
+
+.list {
+  box-sizing: border-box;
+  height: 80%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 0 3px;
+}
+
+.list::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.list::-webkit-scrollbar-button {
+  display: none;
+}
+
+.list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #d1d1d1;
+}
+
+.list > li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.list > li::marker {
+  content: "";
+}
+
+.list > li:hover {
+  cursor: pointer;
+}
+
+.list > li > span > img {
+  height: 2vh;
+  width: 2vw;
+  margin-right: 5px;
+}
+
+.list > li.hide {
+  display: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 93vh;
+  width: 73vw;
+}
+
+.map-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 56vh;
+  padding: 5px;
+  margin-bottom: 13px;
+  border: 1px black solid;
+}
+
+.map-control {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.map-control > * {
+  width: 25vw;
+  margin: 0 2px;
+}
+
+.full-screen-wrapper #covid-map {
+  height: 1000px;
+}
+
+.table-and-chart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 36vh;
+  width: 25vw;
+  border: 1px black solid;
+  padding: 5px;
+}
+
+.dropdown-full-section {
+  display: flex;
+}
+
+.dropdown-full-section > .value-type {
+  width: 100%;
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 21vh;
+  font-size: 15px;
+}
+
+.table-header {
+  margin-bottom: 7px;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.chart-component {
+  height: 36vh;
+  width: 47vw;
+  padding: 5px;
+  border: 1px black solid;
+}
+
+.chart-control {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3vh;
+}
+
+.chart-control > * {
+  width: 25vw;
+  margin: 0 2px;
+}
+
+.chart-control > .value-type {
+  width: 100%;
+}
+
+.chart-component > canvas {
+  width: 90% !important;
+  height: 80% !important;
+}
+
+.full-screen-wrapper canvas {
+  height: 40% !important;
+}
+
+.table-component .full-screen-btn,
+.chart-component .full-screen-btn {
+  width: 40% !important;
+}
+
+#covid-map {
+  height: 90%;
+}
+
+path {
+  transition: fill 200ms;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  line-height: 18px;
+  background-color: rgb(197, 194, 194);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+}
+
+.legend span {
+  margin-bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  float: left;
+  opacity: 0.7;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background-color: rgb(197, 194, 194);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  color: #191a1a;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.leaflet-container {
+  background-color: rgb(25, 26, 26);
+}
+
+.status-btns > span {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  height: 5vh;
+  width: 100vw;
+  align-items: center;
+}
+
+.git-list {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+.git-list > li {
+  margin: 0 11%;
+}
+
+.git-list > li > a {
+  text-decoration: none;
+  color: white;
+}
+
+.rs-logo {
+  width: 50px;
+  height: 20px;
+  background-image: url("../src/assets/rs_school_js.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media only screen and (max-width: 900px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .main {
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .list-component {
+    width: 95%;
+    margin: 5px;
+  }
+
+  .list > li > span > img {
+    width: 5vw;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .map-component {
+    width: 95%;
+    margin: 0 0 5px 0;
+  }
+
+  .table-and-chart {
+    width: 100%;
+  }
+
+  .table-component {
+    width: 30%;
+    overflow-y: scroll;
+  }
+
+  .table-component::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  .table-component::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .table-component::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #d1d1d1;
+  }
+
+  .dropdown-full-section {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .table-header {
+    margin-bottom: 7px;
+  }
+
+  .chart-component {
+    width: 70%;
+  }
+
+  .chart-component > canvas {
+    width: 100% !important;
+  }
+
+  footer {
+    margin: 0 10px;
+  }
+
+  .git-list {
+    padding-left: 0;
+    margin-right: 100px;
+  }
+}
+
+.full-screen-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 95vh;
+}
+
+.simple-keyboard {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 100000;
+  color: black;
+  transition: left 0.5s;
+}
+
+#hide {
+  left: -100vw;
+}
+
+.error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding-top: 40vh;
+  z-index: 99999;
+  background: #191a1a;
+  color: white;
+}
