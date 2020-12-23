@@ -122,7 +122,9 @@ class Map {
       this.legendDiv.innerHTML = '';
 
       const levels = [0.2, 0.4, 0.6, 0.8, 1];
-      const grades = levels.map((percentage) => Math.round(this.maxNum * percentage * 10) / 10);
+      const coefficient = this.STATUS === 'Deaths' ? 1000 : 10;
+      const grades = levels.map((percentage) => Math.round(this.maxNum * percentage * coefficient)
+        / coefficient);
 
       grades.forEach((grade, ind) => {
         this.legendDiv.innerHTML += `<span><i style="background: ${Map.getColor(this.STATUS)}; opacity: ${levels[ind]}"></i> ~${this.VIEW === 'percentage values, %' ? `${grade}%` : `${this.STATUS !== 'Deaths' || this.VIEW === 'absolute values' ? Math.round(grade) : grade}`}</span>`;
