@@ -1,4 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 body {
   box-sizing: border-box;
@@ -206,7 +206,8 @@ main {
   height: 40% !important;
 }
 
-.table-component .full-screen-btn, .chart-component .full-screen-btn {
+.table-component .full-screen-btn,
+.chart-component .full-screen-btn {
   width: 40% !important;
 }
 
@@ -386,4 +387,18 @@ footer {
   justify-content: center;
   width: 100vw;
   height: 95vh;
+}
+
+.simple-keyboard {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 100000;
+  color: black;
+  background: rgb(94, 93, 93) !important;
+  transition: left 0.5s;
+}
+
+#hide {
+  left: -100vw;
 }

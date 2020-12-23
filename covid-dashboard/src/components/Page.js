@@ -1,8 +1,11 @@
+import Keyboard from 'simple-keyboard';
+import 'simple-keyboard/build/css/index.css';
 import ApiCall from './ApiCall';
 import Table from './Table';
 import List from './List';
 import Graph from './Graph';
 import Map from './Map';
+
 import {
   confirmedStatus,
   deathsStatus,
@@ -52,6 +55,27 @@ class Page {
     main.append(this.mapComponent, tableAndChart);
     tableAndChart.append(this.tableComponent, this.chartComponent);
     document.querySelector('main').appendChild(fragment);
+
+    const simple = document.querySelector('.simple-keyboard');
+    const keyboard = new Keyboard({
+      onChange: (input) => this.onChange(input),
+    });
+    keyboard.superUsefulFieldToMakeEslintHappy = null;
+    simple.addEventListener('click', (event) => {
+      if (event.target.textContent === '@') {
+        this.search.value = this.search.value.replace(/@/g, '');
+        simple.id = 'hide';
+        this.inputHandler();
+      }
+    });
+    this.search.addEventListener('click', () => {
+      simple.id = '';
+    });
+  }
+
+  onChange(input) {
+    document.querySelector('input').value = input.replace(/@/g, '');
+    this.inputHandler();
   }
 
   async waitForApi() {
