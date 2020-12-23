@@ -199,7 +199,7 @@ class Map {
 
       const code = props.iso_a2;
       const countryInfo = this.apiData[code];
-      const percentage = countryInfo ? (countryInfo[`${this.TIME === newPeriod ? newPeriod : totalPeriod }${this.STATUS}`] / countryInfo.population) * 100
+      const percentage = countryInfo ? (countryInfo[`${this.TIME === newPeriod ? newPeriod : totalPeriod}${this.STATUS}`] / countryInfo.population) * 100
         : undefined;
 
       let info;
